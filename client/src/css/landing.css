@@ -1,0 +1,14 @@
+
+.Welcome {
+  margin-top: 100px;
+}
+
+.Welcome__name {
+  font-family: 'Chango', cursive;
+  text-align: center;
+  font-size: 2.5em;
+}
+
+.Welcome__nav {
+  text-align: center;
+}

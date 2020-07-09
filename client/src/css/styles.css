@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Chango&display=swap");
+
+html,
+body,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Roboto;
+  font-size: 16px;
+  color: black;
+  background: url("../Components//Images/target.svg") center center no-repeat
+    fixed;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: green;
+  color: white;
+}
+
+strong {
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  height: 36px;
+  border-radius: 2px;
+  text-align: center;
+  color: white;
+  background: green;
+  border: 0;
+  font-weight: 400;
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+button:hover {
+  background: lighten(green, 10%);
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  background: lighten(green, 15%);
+}
+
+.sectionSpacer {
+  height: 130px;
+}
+
+.required,
+.error {
+  color: red;
+  font-style: italic;
+  font-size: 0.9em;
+  margin: 5px 0 10px 0;
+}
+
+@media (min-width: 451px) {
+  .sectionSpacer {
+    height: 80px;
+  }
+}

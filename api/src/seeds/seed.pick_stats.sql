@@ -1,0 +1,25 @@
+INSERT INTO pick_stats (
+  pick_stat_id,
+  team_member_id,
+  pick_date,
+  pick_total,
+  pick_percent,
+  pick_inf
+)
+VALUES
+(
+  1,
+  1,
+  '2020-07-01',
+  8,
+  501,
+  80.2
+),
+(
+  2,
+  2,
+  '2020-06-30',
+  8,
+  601,
+  40.2
+);

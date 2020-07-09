@@ -1,0 +1,22 @@
+INSERT INTO pack_stats (
+  pack_stat_id,
+  team_member_id,
+  pack_date,
+  pack_total,
+  pack_percent
+)
+VALUES
+(
+  1,
+  1,
+  '2020-07-01',
+  8,
+  501
+),
+(
+  2,
+  2,
+  '2020-06-30',
+  8,
+  601
+);

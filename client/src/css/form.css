@@ -1,0 +1,99 @@
+.Form__header {
+  font-family: "BrandonMed", sans-serif;
+  font-size: 20px;
+  color: black;
+}
+
+.Form__outer {
+  font-family: "BrandonLight", sans-serif;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.Form__outer li {
+  justify-self: left;
+  margin-top: 8px;
+}
+
+.Form__outer label {
+  margin-right: 10px;
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+}
+
+.Form__outer input {
+  padding: 5px;
+}
+
+.Form__outer .button {
+  width: 100%;
+  transition: all 300ms ease-in;
+}
+
+.Form__outer button:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.Form__outer .Form__button {
+  text-align: center;
+}
+
+.Form__button {
+  text-align: left;
+}
+
+.Form__button button {
+  margin-top: 15px;
+}
+
+.Form__button .button-link {
+  width: 100%;
+  background-color: #f5f5f5;
+  color: green;
+}
+
+.Form__button:hover {
+  color: red;
+}
+
+.Form__required,
+.Form__error {
+  color: red;
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+.Form__error {
+  text-align: center;
+  font-weight: bold;
+}
+
+.Form-items li label {
+  font-weight: 600;
+  display: inline-block;
+  width: 100px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.Form-items li {
+  margin: 10px 0;
+}
+
+@media (min-width: 650px) {
+  .Form__outer {
+    padding: 20px;
+  }
+
+  .Form-items li label {
+    margin-right: 10px;
+    text-align: right;
+  }
+
+  .Form__button {
+    text-align: center;
+  }
+}
