@@ -1,41 +1,40 @@
+const path = require("path");
 const express = require("express");
 const xss = require("xss");
+const logger = require("../logger");
 const StatsService = require("./stats-service");
+const { requireAuth } = require("../middleware/jwt-auth");
 
 const statsRouter = express.Router();
+const jsonParser = express.json();
 
-const serializePickStats = (stat) => ({
+const serializeStatsMember = (stat) => ({
   stat_id: stat.stat_id,
-  pick_date: stat.pick_date,
+  date: stat.date,
   team_member_id: stat.team_member_id,
-  pick_total: stat.pick_total,
-  pick_percent: stat.pick_percent,
-  pick_inf: stat.pick_inf,
+  first_name: xss(stat.first_name),
+  last_name: xss(stat.last_name),
+  stat_type: xss(stat.stat_type),
+  total: stat.total,
+  percent: stat.percent,
+  inf: stat.inf,
 });
 
-const serializePackStats = (stat) => ({
+const serializeStats = (stat) => ({
   stat_id: stat.stat_id,
-  pack_date: stat.pack_date,
+  date: stat.date,
   team_member_id: stat.team_member_id,
-  pack_total: stat.pack_total,
-  pack_percent: stat.pack_percent,
-  pack_inf: stat.pack_inf,
-});
-
-const serializeOpuStats = (stat) => ({
-  stat_id: stat.stat_id,
-  opu_date: stat.opu_date,
-  team_member_id: stat.team_member_id,
-  opu_total: stat.opu_total,
-  opu_percent: stat.opu_percent,
-  opu_inf: stat.opu_inf,
+  stat_type: xss(stat.stat_type),
+  total: stat.total,
+  percent: stat.percent,
+  inf: stat.inf,
 });
 
 statsRouter
-  .route("/pick/")
+  .route("/all")
 
   .get((req, res, next) => {
-    StatsService.getAllPick(req.app.get("db"))
+    StatsService.getAll(req.app.get("db"))
       .then((stats) => {
         let result = [];
         let index = {};
@@ -46,17 +45,17 @@ statsRouter
               team_member_id: stat.team_member_id,
               first_name: xss(stat.first_name),
               last_name: xss(stat.last_name),
-              pick_stats: []
+              stats: [],
             };
-            result.push(index[stat.team_member_id])
+            result.push(index[stat.team_member_id]);
           }
-          index[stat.team_member_id].pick_stats.push({
-            pick_stat_id: stat.pick_stat_id,
-            pick_date: stat.pick_date,
-            pick_total: stat.pick_total,
-            pick_percent: stat.pick_percent,
-            pick_inf: stat.pick_inf,
-          })
+          index[stat.team_member_id].stats.push({
+            stat_id: stat.pick_stat_id,
+            date: stat.pick_date,
+            total: stat.pick_total,
+            percent: stat.pick_percent,
+            inf: stat.pick_inf,
+          });
         });
         res.json(result);
       })
@@ -64,66 +63,13 @@ statsRouter
   });
 
 statsRouter
-  .route("/pack/")
+  .route("/lastday")
 
   .get((req, res, next) => {
-    StatsService.getAllPack(req.app.get("db"))
-    .then((stats) => {
-      let result = [];
-      let index = {};
-
-      stats.forEach((stat) => {
-        if (!(stat.team_member_id in index)) {
-          index[stat.team_member_id] = {
-            team_member_id: stat.team_member_id,
-            first_name: xss(stat.first_name),
-            last_name: xss(stat.last_name),
-            pack_stats: []
-          };
-          result.push(index[stat.team_member_id])
-        }
-        index[stat.team_member_id].pack_stats.push({
-          pack_stat_id: stat.pack_stat_id,
-          pack_date: stat.pack_date,
-          pack_total: stat.pack_total,
-          pack_percent: stat.pack_percent,
-          pack_inf: stat.pack_inf,
-        })
-      });
-      res.json(result);
-    })
-      .catch(next);
-  });
-
-statsRouter
-  .route("/opu/")
-
-  .get((req, res, next) => {
-    StatsService.getAllOpu(req.app.get("db"))
-    .then((stats) => {
-      let result = [];
-      let index = {};
-
-      stats.forEach((stat) => {
-        if (!(stat.team_member_id in index)) {
-          index[stat.team_member_id] = {
-            team_member_id: stat.team_member_id,
-            first_name: xss(stat.first_name),
-            last_name: xss(stat.last_name),
-            opu_stats: []
-          };
-          result.push(index[stat.team_member_id])
-        }
-        index[stat.team_member_id].opu_stats.push({
-          opu_stat_id: stat.opu_stat_id,
-          opu_date: stat.opu_date,
-          opu_total: stat.opu_total,
-          opu_percent: stat.opu_percent,
-          opu_inf: stat.opu_inf,
-        })
-      });
-      res.json(result);
-    })
+    StatsService.getAllLastDay(req.app.get("db"))
+      .then((stats) => {
+        res.json(stats.rows.map(serializeStatsMember));
+      })
       .catch(next);
   });
 
@@ -145,7 +91,42 @@ statsRouter
   })
 
   .get((req, res) => {
-    res.json(serializeStats(res.stat));
+    res.json(serializeStatsMember(res.stat));
+  });
+
+statsRouter
+  .route("/")
+
+  .post(jsonParser, (req, res, next) => {
+    const { team_member_id, stat_type, date, total, percent, inf } = req.body;
+
+    const newStats = {
+      team_member_id,
+      stat_type,
+      date,
+      total,
+      percent,
+      inf,
+    };
+
+    const numberOfValues = Object.values(newStats).filter(Boolean).length;
+    if (numberOfValues === 0) {
+      return res.sendStatus(400).json({
+        error: {
+          message: `Request body must contain all data`,
+        },
+      });
+    }
+
+    StatsService.insertStat(req.app.get("db"), newStats)
+      .then((stats) => {
+        logger.info(`Statistics with id ${stats.stat_id} created.`);
+        res
+          .status(201)
+          .location(path.posix.join(req.originalUrl, `/${stats.stat_id}`))
+          .json(serializeStats(stats));
+      })
+      .catch(next);
   });
 
 module.exports = statsRouter;

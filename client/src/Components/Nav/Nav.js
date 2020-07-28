@@ -12,13 +12,13 @@ export default class Nav extends Component {
     return (
       <>
         <li>
-          <NavLink to="/addStats">Add</NavLink>
+          <NavLink to="/teammembers">Team Members</NavLink>
         </li>
         <li>
-          <NavLink to="/updateStats">Update</NavLink>
+          <NavLink to="/statistics">Statistics</NavLink>
         </li>
         <li>
-          <NavLink to="/view">View</NavLink>
+          <NavLink to="/graphs">Graphs</NavLink>
         </li>
         <li>
           <NavLink to="/" onClick={this.handleLogoutClick}>
@@ -40,9 +40,6 @@ export default class Nav extends Component {
         </li>
         <li>
           <NavLink to="/login">Login</NavLink>
-        </li>
-        <li>
-          <NavLink to="/registration">Register</NavLink>
         </li>
       </>
     );

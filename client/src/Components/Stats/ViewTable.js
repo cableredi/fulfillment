@@ -6,9 +6,9 @@ function pickStats(stats) {
 
   stats.map((stat) => {
     let indivData = {};
-    
+
     stat.pick_stats.map((pick) => {
-      return indivData[pick.pick_date] = Number(pick.pick_total);
+      return (indivData[pick.pick_date] = Number(pick.pick_total));
     });
 
     pickData.push({
@@ -27,9 +27,9 @@ function opuStats(stats) {
 
   stats.map((stat) => {
     let indivData = {};
-    
+
     stat.opu_stats.map((opu) => {
-      return indivData[opu.opu_date] = Number(opu.opu_total);
+      return (indivData[opu.opu_date] = Number(opu.opu_total));
     });
 
     opuData.push({
@@ -48,9 +48,9 @@ function packStats(stats) {
 
   stats.map((stat) => {
     let indivData = {};
-    
+
     stat.pack_stats.map((pack) => {
-      return indivData[pack.pack_date] = Number(pack.pack_total);
+      return (indivData[pack.pack_date] = Number(pack.pack_total));
     });
 
     packData.push({
@@ -63,8 +63,6 @@ function packStats(stats) {
 
   return packData;
 }
-
-
 
 export default function ViewTable(props) {
   const { pick_stats, pack_stats, opu_stats } = props;

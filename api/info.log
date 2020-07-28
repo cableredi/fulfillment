@@ -878,3 +878,60 @@
 {"message":"select * from \"pick_stats\" inner join \"team_members\" on \"team_members\".\"team_member_id\" = \"pick_stats\".\"team_member_id\" group by \"pick_stats\".\"team_member_id\", \"first_name\", \"last_name\", \"pick_stat_id\", \"pick_total\", \"pick_percent\", \"pick_inf\" order by \"pick_stats\".\"team_member_id\" asc - column \"team_members.team_member_id\" must appear in the GROUP BY clause or be used in an aggregate function","level":"error"}
 {"message":"select * from \"pack_stats\" inner join \"team_members\" on \"team_members\".\"team_member_id\" = \"pack_stats\".\"team_member_id\" order by \"team_member_id\" asc - ORDER BY \"team_member_id\" is ambiguous","level":"error"}
 {"message":"select * from \"opu_stats\" inner join \"team_members\" on \"team_members\".\"team_member_id\" = \"opu_stats\".\"team_member_id\" order by \"team_member_id\" asc - ORDER BY \"team_member_id\" is ambiguous","level":"error"}
+{"message":"connect ECONNREFUSED 127.0.0.1:5432","level":"error"}
+{"message":"the database system is starting up","level":"error"}
+{"message":"error is not defined","level":"error"}
+{"message":"insert into \"team_members\" (\"first_name\", \"last_name\") values ($1, $2) returning * - duplicate key value violates unique constraint \"team_members_pkey\"","level":"error"}
+{"message":"insert into \"team_members\" (\"first_name\", \"last_name\") values ($1, $2) returning * - duplicate key value violates unique constraint \"team_members_pkey\"","level":"error"}
+{"message":"Team member with id 3 created.","level":"info"}
+{"message":"Team member with id 4 created.","level":"info"}
+{"message":"Team member with id 5 created.","level":"info"}
+{"message":"Team member with id 6 created.","level":"info"}
+{"message":"Team member with id 7 created.","level":"info"}
+{"message":"Team member with id 1 created.","level":"info"}
+{"message":"Team member with id 2 created.","level":"info"}
+{"message":"Team member with id 3 created.","level":"info"}
+{"message":"Team member with id 4 created.","level":"info"}
+{"message":"insert into \"team_members\" (\"first_name\", \"last_name\") values ($1, $2) returning * - duplicate key value violates unique constraint \"team_members_first_name_last_name_key\"","level":"error"}
+{"message":"Team member with id 6 created.","level":"info"}
+{"message":"Team member with id 7 created.","level":"info"}
+{"message":"Team member with id 8 created.","level":"info"}
+{"message":"Team member with id 9 created.","level":"info"}
+{"message":"Team member with id 10 created.","level":"info"}
+{"message":"Team member with id 11 created.","level":"info"}
+{"message":"Team member with id 12 created.","level":"info"}
+{"message":"Team member with id 13 created.","level":"info"}
+{"message":"Team member with id 14 created.","level":"info"}
+{"message":"Team member with id 15 created.","level":"info"}
+{"message":"Team member with id 16 created.","level":"info"}
+{"message":"Team member with id 17 created.","level":"info"}
+{"message":"Team member with id 18 created.","level":"info"}
+{"message":"Team member with id 19 created.","level":"info"}
+{"message":"Team member with id 20 created.","level":"info"}
+{"message":"Team member with id 21 created.","level":"info"}
+{"message":"Team member with id 22 created.","level":"info"}
+{"message":"Team member with id 23 created.","level":"info"}
+{"message":"Team member with id 24 created.","level":"info"}
+{"message":"Team member with id 25 created.","level":"info"}
+{"message":"Team member with id 26 created.","level":"info"}
+{"message":"Team member with id 27 created.","level":"info"}
+{"message":"Team member with id 28 created.","level":"info"}
+{"message":"Team member with id 29 created.","level":"info"}
+{"message":"Team member with id 30 created.","level":"info"}
+{"message":"select * from \"pick_stats\" inner join \"team_members\" on \"team_members\".\"team_member_id\" = \"pick_stats\".\"team_member_id\" inner join \"pack_stats\" on \"team_members\".\"team_member_id\" = \"pack_stats\".\"team_member_id\" inner join \"opu_stats\" on \"team_members\".\"team_member_id\" = \"opu_stats\".\"team_member_id\" - relation \"pick_stats\" does not exist","level":"error"}
+{"message":"select * from \"stats\" inner join \"team_members\" on \"team_members\".\"team_member_id\" = \"pick_stats\".\"team_member_id\" inner join \"pack_stats\" on \"team_members\".\"team_member_id\" = \"pack_stats\".\"team_member_id\" inner join \"opu_stats\" on \"team_members\".\"team_member_id\" = \"opu_stats\".\"team_member_id\" - missing FROM-clause entry for table \"pick_stats\"","level":"error"}
+{"message":"stats.forEach is not a function","level":"error"}
+{"message":"stats.forEach is not a function","level":"error"}
+{"message":"stats.forEach is not a function","level":"error"}
+{"message":"Team member with id 31 created.","level":"info"}
+{"message":"stats.map is not a function","level":"error"}
+{"message":"stats.map is not a function","level":"error"}
+{"message":"insert into \"stats\" (\"date\", \"inf\", \"percent\", \"stat_type\", \"team_member_id\", \"total\") values ($1, $2, $3, $4, $5, $6) returning * - duplicate key value violates unique constraint \"stats_pkey\"","level":"error"}
+{"message":"insert into \"stats\" (\"date\", \"inf\", \"percent\", \"stat_type\", \"team_member_id\", \"total\") values ($1, $2, $3, $4, $5, $6) returning * - duplicate key value violates unique constraint \"stats_pkey\"","level":"error"}
+{"message":"Statistics with id 3 created.","level":"info"}
+{"message":"Statistics with id 4 created.","level":"info"}
+{"message":"Statistics with id 5 created.","level":"info"}
+{"message":"Statistics with id 6 created.","level":"info"}
+{"message":"Statistics with id 7 created.","level":"info"}
+{"message":"Statistics with id 8 created.","level":"info"}
+{"message":"Statistics with id 9 created.","level":"info"}

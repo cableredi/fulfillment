@@ -1,44 +1,42 @@
 const StatsService = {
-  getAllPick(knex) {
-    return knex
-      .select("*")
-      .from("pick_stats")
-      .join(
-        "team_members",
-        "team_members.team_member_id",
-        "pick_stats.team_member_id"
-      )
-      .orderBy("pick_stats.team_member_id", "asc", "pick_date", "asc")
+  getAllLastDay(knex) {
+    return knex.raw(`
+        select *
+        from stats
+        join team_members on team_members.team_member_id = stats.team_member_id
+        where date = (
+          select max(date)
+          from stats
+        )
+      `);
   },
-  getAllPack(knex) {
+  getAll(knex) {
     return knex
       .select("*")
-      .from("pack_stats")
+      .from("stats")
       .join(
         "team_members",
         "team_members.team_member_id",
-        "pack_stats.team_member_id"
+        "stats.team_member_id"
       )
-      .orderBy("pack_stats.team_member_id", "asc", "pack_date", "asc");
-  },
-  getAllOpu(knex) {
-    return knex
-      .select("*")
-      .from("opu_stats")
-      .join(
-        "team_members",
-        "team_members.team_member_id",
-        "opu_stats.team_member_id"
-      )
-      .orderBy("opu_stats.team_member_id", "asc", "opu_date", "asc");
+      .orderBy("stats.team_member_id", "asc", "date", "asc");
   },
   getByTeamMemberId(knex, id) {
     return knex
       .select("*")
       .from("pick_stats")
-      .where("pick_stats.team_member_id", id)
+      .where("pick_stats", "team_member_id", id)
       .join("pack_stats", "pack_stats.team_member_id", id)
       .join("opu_stats", "opu_stats.team_member_id", id);
+  },
+  insertStat(knex, stat) {
+    return knex
+      .insert(stat)
+      .into('stats')
+      .returning('*')
+      .then(rows => {
+        return rows[0]
+      })
   },
 };
 

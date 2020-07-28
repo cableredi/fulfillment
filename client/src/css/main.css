@@ -13,3 +13,27 @@
   padding: 20px;
   background-color: #efefef;
 }
+
+.main__card h1 {
+  font-weight: 600;
+  font-size: 1.5em;
+  margin-bottom: 0.8em;
+}
+
+.main__card h2 {
+  font-weight: 600;
+  font-size: 1em;
+  margin: 0.8em 0;
+}
+
+.main__card li {
+  margin-left: 20px;
+}
+
+.main__card button {
+  margin-top: 20px;
+}
+
+.main__card table {
+  margin-top: 10px;
+}

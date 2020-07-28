@@ -1,36 +1,21 @@
-import React, { Component } from "react";
-import { GlobalContext } from "../Context/GlobalContext";
+import React, { Component, useState } from "react";
 import LoginForm from "../Components/LoginForm";
 
-export default class LoginPage extends Component {
-  static contextType = GlobalContext;
-
-  static defaultProps = {
-    location: {},
-    history: {
-      push: () => {},
-    },
-  };
-  state = {
-    error: null,
-  };
+export default function LoginPage(props) {
+  const [error, setError] = useState("");
+  const { history } = props;
 
   handleLoginSuccess = () => {
-    const { history } = this.props;
-    console.log("login success");
-
-    history.push("/stats");
+    history.push("/main");
   };
 
-  render() {
-    return (
-      <div className="Login">
-        <h2>Login</h2>
+  return (
+    <div className="Login">
+      <h2>Login</h2>
 
-        {this.state.error && <p className="error">{this.state.error}</p>}
+      {error && <p className="error">{error}</p>}
 
-        <LoginForm onLoginSuccess={this.handleLoginSuccess} />
-      </div>
-    );
-  }
+      <LoginForm onLoginSuccess={handleLoginSuccess} />
+    </div>
+  );
 }

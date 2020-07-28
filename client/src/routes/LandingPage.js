@@ -16,8 +16,6 @@ export default function Welcome() {
     TokenService.clearAuthToken();
     TokenService.clearCallbackBeforeExpiry();
     IdleService.unRegisterIdleResets();
-    this.resetState({});
-    this.forceUpdate();
   };
 
   const handleLoginSuccess = () => {
@@ -29,10 +27,6 @@ export default function Welcome() {
     });
     setOpenLogin(false);
     history.push('/main');
-  };
-
-  const handleRegisterClick = () => {
-    setOpenLogin(false);
   };
 
   return (
@@ -48,7 +42,6 @@ export default function Welcome() {
         <Modal open={openLogin} toggle={setOpenLogin}>
           <LoginModalForm
             onLoginSuccess={() => handleLoginSuccess()}
-            onRegisterClick={() => handleRegisterClick()}
           />
         </Modal>
       )}

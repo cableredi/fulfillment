@@ -1,9 +1,9 @@
 import config from "../config";
 import TokenService from "./token-service";
 
-const ProductsApiService = {
-  getAllLastDay() {
-    return fetch(config.API_ENDPOINT_STATS + "/lastday", {
+const TeamMembersApiService = {
+  getAll() {
+    return fetch(config.API_ENDPOINT_TEAMMEMBERS, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -13,18 +13,18 @@ const ProductsApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
-  addStatistics(stats) {
-    return fetch(config.API_ENDPOINT_STATS, {
+  addName(teamMember) {
+    return fetch(config.API_ENDPOINT_TEAMMEMBERS, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify(stats),
+      body: JSON.stringify(teamMember),
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
 };
 
-export default ProductsApiService;
+export default TeamMembersApiService;

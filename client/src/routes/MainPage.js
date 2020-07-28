@@ -9,13 +9,13 @@ export default function MainPage() {
       <Nav />
       <div className="main">
         <div className="main__card">
-          <NavLink to="/addStats">Add</NavLink>
+          <NavLink to="/teammembers">Team members</NavLink>
         </div>
         <div className="main__card">
-          <NavLink to="/view">Update</NavLink>
+          <NavLink to="/statistics">Statistics</NavLink>
         </div>
         <div className="main__card">
-          <NavLink to="/view">View</NavLink>
+          <NavLink to="/graphs">Graphs</NavLink>
         </div>
       </div>
     </>

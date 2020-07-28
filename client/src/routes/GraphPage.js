@@ -5,9 +5,7 @@ import StatsApiService from "../services/stats-api-service";
 import ViewTable from "../Components/Stats/ViewTable";
 import "../css/main.css";
 
-export default function ViewPage() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
+export default function GraphPage() {
   const {
     pick_stats,
     setPickStats,

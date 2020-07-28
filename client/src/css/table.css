@@ -1,0 +1,34 @@
+table {
+  border-collapse: collapse;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+td, th {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.table-name {
+  width: 60px;
+}
+
+.table-date {
+  width: 50px;
+}
+
+.table-type {
+  width: 50px;
+}
+
+.table-total {
+  width: 50px;
+}
+
+.table-percent {
+  width: 50px;
+}
+
+.table-inf {
+  width: 50px;
+}

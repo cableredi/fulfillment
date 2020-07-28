@@ -1,70 +1,62 @@
 import React, { createContext, useReducer } from "react";
 import StatsReducer from "./StatsReducer";
+import TeamMembersReducer from "./TeamMembersReducer";
 
 export const GlobalContext = createContext(null);
 
 export const GlobalProvider = ({ children }) => {
-  const [pick_stats, dispatchPickStats] = useReducer(StatsReducer, []);
-  const [pack_stats, dispatchPackStats] = useReducer(StatsReducer, []);
-  const [opu_stats, dispatchOpuStats] = useReducer(StatsReducer, []);
+  const [stats, dispatchStats] = useReducer(StatsReducer, []);
+  const [team_members, dispatchTeamMembers] = useReducer(
+    TeamMembersReducer,
+    []
+  );
 
-  const setPickStats = (stats) => {
-    dispatchPickStats({
-      type: "SET_PICK_STATS",
+  const setStats = (stats) => {
+    dispatchStats({
+      type: "SET_STATS",
       payload: stats,
     });
   };
 
-
-  const updatePickStat = (selectedStat) => {
-    dispatchPickStats({
-      type: "UPDATE_PICK_STAT",
-      payload: selectedStat,
+  const addStat = (stat) => {
+    dispatchStats({
+      type: "Add_STAT",
+      payload: stat,
     });
   };
 
-  const setPackStats = (stats) => {
-    dispatchPackStats({
-      type: "SET_PACK_STATS",
-      payload: stats,
+  const setTeamMembers = (team_members) => {
+    dispatchTeamMembers({
+      type: "SET_TEAM_MEMBERS",
+      payload: team_members,
     });
   };
 
-  const updatePackStat = (selectedStat) => {
-    dispatchPackStats({
-      type: "UPDATE_PACK_STAT",
-      payload: selectedStat,
-    });
-  };  
-
-  const setOpuStats = (stats) => {
-    dispatchOpuStats({
-      type: "SET_OPU_STATS",
-      payload: stats,
+  const addTeamMember = (team_member) => {
+    dispatchTeamMembers({
+      type: "ADD_TEAM_MEMBER",
+      payload: team_member,
     });
   };
 
-  const updateOpuStat = (selectedStat) => {
-    dispatchOpuStats({
-      type: "UPDATE_OPU_STAT",
-      payload: selectedStat,
+  const updateTeamMember = (team_member) => {
+    dispatchTeamMembers({
+      type: "UPDATE_TEAM_MEMBER",
+      payload: team_member,
     });
   };
 
   return (
     <GlobalContext.Provider
       value={{
-        pick_stats: pick_stats,
-        setPickStats,
-        updatePickStat,
+        stats: stats,
+        setStats,
+        addStat,
 
-        pack_stats: pack_stats,
-        setPackStats,
-        updatePackStat,
-
-        opu_stats: opu_stats,
-        setOpuStats,
-        updateOpuStat,
+        team_members: team_members,
+        setTeamMembers,
+        addTeamMember,
+        updateTeamMember,
       }}
     >
       {children}
