@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import useForm from "../Hooks/useForm";
 import TeamMembersApiService from "../../services/team-members-api-service";
 import ValidateError from "../ValidateError";
-import "../../css/form.css";
+import "../../assets/css/form.css";
 
 export default function TeamMemberModalForm(props) {
-  const { onSubmit  } = props;
+  const { onSubmit } = props;
   const [apiError, setApiError] = useState("");
 
   const stateSchema = {
@@ -22,14 +22,13 @@ export default function TeamMemberModalForm(props) {
     setApiError("");
 
     TeamMembersApiService.addName(state)
-    .then((team_member) => {
-      onSubmit(team_member);
-    })
+      .then((team_member) => {
+        onSubmit(team_member);
+      })
       .catch((res) => {
         setApiError(res.error);
       });
   };
-
 
   /************************/
   /* Validate Form Fields */

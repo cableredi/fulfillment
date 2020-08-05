@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import "../../css/modal.css";
+import "../../assets/css/modal.css";
 
 function Portal({ children }) {
   const modalRoot = document.getElementById("modal-root");

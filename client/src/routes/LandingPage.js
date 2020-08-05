@@ -5,7 +5,7 @@ import AuthApiService from "../services/auth-service";
 import IdleService from "../services/idle-service";
 import useToggle from "../Components/Hooks/useToggle";
 import Modal from "../Components/Modals/Modal";
-import "../css/landing.css";
+import "../assets/css/landing.css";
 import { useHistory } from "react-router-dom";
 
 export default function Welcome() {

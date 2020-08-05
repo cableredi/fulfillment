@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Nav from "../Components/Nav/Nav";
-import "../css/main.css";
+import "../assets/css/main.css";
 
 export default function MainPage() {
   return (

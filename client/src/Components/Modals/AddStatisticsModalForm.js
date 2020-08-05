@@ -1,17 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import useForm from "../Hooks/useForm";
-import { GlobalContext } from "../../Context/GlobalContext";
 import ValidateError from "../ValidateError";
 import StatisticsApiService from "../../services/stats-api-service";
 import TeamMembersApiService from "../../services/team-members-api-service";
 import DatePicker from "react-datepicker";
-import "../../css/form.css";
+import "../../assets/css/form.css";
 import "react-datepicker/dist/react-datepicker.css";
 
 const Required = () => <span className="Form__required">*</span>;
 
 export default function AddStatistics(props) {
-  const { onSubmit  } = props;
+  const { onSubmit } = props;
   const [apiError, setApiError] = useState("");
   const [teamMembers, setTeamMembers] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
@@ -19,7 +18,6 @@ export default function AddStatistics(props) {
   const stateSchema = {
     team_member_id: { value: "", error: "" },
     stat_type: { value: "", error: "" },
-    date: { value: startDate, error: "" },
     total: { value: "", error: "" },
     percent: { value: "", error: "" },
     inf: { value: 0, error: "" },
@@ -35,12 +33,17 @@ export default function AddStatistics(props) {
   // submit form
   const onSubmitForm = (state) => {
     setApiError("");
+    let stats = state;
 
-    StatisticsApiService.addStatistics(state)
+    stats.date = startDate;
+
+    StatisticsApiService.addStatistics(stats)
       .then((statistics) => {
         onSubmit(statistics);
       })
-      .catch((error) => setApiError(error));
+      .catch((res) => {
+        setApiError(res.error);
+      });
   };
 
   // validate form fields
@@ -88,7 +91,7 @@ export default function AddStatistics(props) {
     disable,
   } = useForm(stateSchema, stateValidatorSchema, onSubmitForm);
 
-  const { team_member_id, stat_type, date, total, percent, inf } = values;
+  const { team_member_id, stat_type, total, percent, inf } = values;
 
   const teamMemberOptions = teamMembers.map((member, i) => (
     <option value={member.team_member_id} key={i}>
@@ -177,7 +180,7 @@ export default function AddStatistics(props) {
               name="date"
               id="date"
               selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              onChange={(startDate) => setStartDate(startDate)}
               value={startDate}
             />
           </li>

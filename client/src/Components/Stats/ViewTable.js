@@ -1,89 +1,64 @@
 import React from "react";
-import Charts from "../Charts/Charts";
-
-function pickStats(stats) {
-  let pickData = [];
-
-  stats.map((stat) => {
-    let indivData = {};
-
-    stat.pick_stats.map((pick) => {
-      return (indivData[pick.pick_date] = Number(pick.pick_total));
-    });
-
-    pickData.push({
-      name: stat.first_name + " " + stat.last_name,
-      data: indivData,
-    });
-
-    return pickData;
-  });
-
-  return pickData;
-}
-
-function opuStats(stats) {
-  let opuData = [];
-
-  stats.map((stat) => {
-    let indivData = {};
-
-    stat.opu_stats.map((opu) => {
-      return (indivData[opu.opu_date] = Number(opu.opu_total));
-    });
-
-    opuData.push({
-      name: stat.first_name + " " + stat.last_name,
-      data: indivData,
-    });
-
-    return opuData;
-  });
-
-  return opuData;
-}
-
-function packStats(stats) {
-  let packData = [];
-
-  stats.map((stat) => {
-    let indivData = {};
-
-    stat.pack_stats.map((pack) => {
-      return (indivData[pack.pack_date] = Number(pack.pack_total));
-    });
-
-    packData.push({
-      name: stat.first_name + " " + stat.last_name,
-      data: indivData,
-    });
-
-    return packData;
-  });
-
-  return packData;
-}
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
 
 export default function ViewTable(props) {
-  const { pick_stats, pack_stats, opu_stats } = props;
+  const { opu_stats } = props;
 
-  const chartPickData = pickStats(pick_stats);
-  const chartPackData = packStats(pack_stats);
-  const chartOpuData = opuStats(opu_stats);
+  const data = opu_stats;
+
+  let team_members = [];
+
+  data.forEach((item) => {
+    Object.keys(item).forEach((key, index) => {
+      if (key !== "name") {
+        if (!team_members.includes(key)) {
+          team_members.push(key);
+        }
+      }
+    });
+  });
+
+  console.log(data);
+  team_members.forEach((member) => {
+    console.log(member);
+  });
+
+  const colors = ["#ff0000", "#0000cc", "#00ff00", "#6600cc", "#993333", "#ffff00", "#00ffff"];
 
   return (
     <>
       <div className="ViewTable">
-        <h1>Pick</h1>
-        <Charts data={chartPickData} />
-      </div>
-      <div className="ViewTable">
-        <h1>Pack</h1>
-        <Charts data={chartPackData} />
-      </div>
-      <div className="ViewTable">
-        <h1>OPU</h1>
-        <Charts data={chartOpuData} />
+        <h1>OPU Total Picked</h1>
+        <BarChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+
+          {team_members.map((member, index) => {
+            return (<Bar dataKey={`${member}`} fill={`${colors[index]}`} />);
+          })}
+        </BarChart>
       </div>
     </>
   );

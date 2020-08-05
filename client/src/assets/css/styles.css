@@ -12,7 +12,7 @@ body {
   font-family: Roboto;
   font-size: 16px;
   color: black;
-  background: url("../Components//Images/target.svg") center center no-repeat
+  background: url("../../Components//Images/target.svg") center center no-repeat
     fixed;
 }
 

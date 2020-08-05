@@ -13,7 +13,6 @@ export default (state, action) => {
       );
 
     case "ADD_TEAM_MEMBER":
-      console.log('add team member reducer')
       return [...state, action.payload]
 
     default:

@@ -4,26 +4,17 @@ const xss = require("xss");
 const logger = require("../logger");
 const StatsService = require("./stats-service");
 const { requireAuth } = require("../middleware/jwt-auth");
+const TeamMembersService = require("../team-members/team-members-service");
 
 const statsRouter = express.Router();
 const jsonParser = express.json();
 
 const serializeStatsMember = (stat) => ({
   stat_id: stat.stat_id,
-  date: stat.date,
+  stat_date: stat.stat_date,
   team_member_id: stat.team_member_id,
   first_name: xss(stat.first_name),
   last_name: xss(stat.last_name),
-  stat_type: xss(stat.stat_type),
-  total: stat.total,
-  percent: stat.percent,
-  inf: stat.inf,
-});
-
-const serializeStats = (stat) => ({
-  stat_id: stat.stat_id,
-  date: stat.date,
-  team_member_id: stat.team_member_id,
   stat_type: xss(stat.stat_type),
   total: stat.total,
   percent: stat.percent,
@@ -36,37 +27,16 @@ statsRouter
   .get((req, res, next) => {
     StatsService.getAll(req.app.get("db"))
       .then((stats) => {
-        let result = [];
-        let index = {};
-
-        stats.forEach((stat) => {
-          if (!(stat.team_member_id in index)) {
-            index[stat.team_member_id] = {
-              team_member_id: stat.team_member_id,
-              first_name: xss(stat.first_name),
-              last_name: xss(stat.last_name),
-              stats: [],
-            };
-            result.push(index[stat.team_member_id]);
-          }
-          index[stat.team_member_id].stats.push({
-            stat_id: stat.pick_stat_id,
-            date: stat.pick_date,
-            total: stat.pick_total,
-            percent: stat.pick_percent,
-            inf: stat.pick_inf,
-          });
-        });
-        res.json(result);
+        res.json(stats);
       })
       .catch(next);
   });
 
 statsRouter
-  .route("/lastday")
+  .route("/date")
 
   .get((req, res, next) => {
-    StatsService.getAllLastDay(req.app.get("db"))
+    StatsService.getMaxDate(req.app.get("db"))
       .then((stats) => {
         res.json(stats.rows.map(serializeStatsMember));
       })
@@ -98,12 +68,19 @@ statsRouter
   .route("/")
 
   .post(jsonParser, (req, res, next) => {
-    const { team_member_id, stat_type, date, total, percent, inf } = req.body;
+    const {
+      team_member_id,
+      stat_type,
+      stat_date,
+      total,
+      percent,
+      inf,
+    } = req.body;
 
     const newStats = {
       team_member_id,
       stat_type,
-      date,
+      stat_date,
       total,
       percent,
       inf,
@@ -121,10 +98,18 @@ statsRouter
     StatsService.insertStat(req.app.get("db"), newStats)
       .then((stats) => {
         logger.info(`Statistics with id ${stats.stat_id} created.`);
-        res
-          .status(201)
-          .location(path.posix.join(req.originalUrl, `/${stats.stat_id}`))
-          .json(serializeStats(stats));
+
+        return TeamMembersService.getById(
+          req.app.get("db"),
+          stats.team_member_id
+        )
+          .then((member) => {
+            stats.first_name = member.first_name;
+            stats.last_name = member.last_name;
+
+            res.json(serializeStatsMember(stats));
+          })
+          .catch(next);
       })
       .catch(next);
   });

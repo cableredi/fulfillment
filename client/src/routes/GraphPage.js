@@ -3,48 +3,45 @@ import Nav from "../Components/Nav/Nav";
 import { GlobalContext } from "../Context/GlobalContext";
 import StatsApiService from "../services/stats-api-service";
 import ViewTable from "../Components/Stats/ViewTable";
-import "../css/main.css";
+import "../assets/css/main.css";
+import {getFormattedDate} from '../helpers/formattedDate';
 
 export default function GraphPage() {
-  const {
-    pick_stats,
-    setPickStats,
-    pack_stats,
-    setPackStats,
-    opu_stats,
-    setOpuStats,
-  } = useContext(GlobalContext);
+  const { stats, setStats } = useContext(GlobalContext);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    console.log("user Effect called");
-    const pickAllRequest = StatsApiService.getAllPick();
-    const packAllRequest = StatsApiService.getAllPack();
-    const opuAllRequest = StatsApiService.getAllOpu();
-
-    Promise.all([pickAllRequest, packAllRequest, opuAllRequest])
-      .then((values) => {
-        setPickStats(values[0]);
-        setPackStats(values[1]);
-        setOpuStats(values[2]);
-      })
+    StatsApiService.getAll()
+      .then(setStats)
       .catch((error) => setError(error));
   }, []);
 
-  console.log("database", pick_stats, pack_stats, opu_stats);
+
+
+  const opu_stats = stats.filter((stat) => stat.stat_type === "opu");
+  
+  let opu_results = [];
+  let index = {};
+
+  opu_stats.forEach((stat) => {
+    if (!(stat.stat_date in index)) {
+      index[stat.stat_date] = {
+        name: getFormattedDate(stat.stat_date),
+      }
+
+      opu_results.push(index[stat.stat_date]);
+    }
+
+    index[stat.stat_date][stat.first_name] = Number(stat.total);
+
+  });
 
   return (
     <>
       <Nav />
       <div className="main">
         <div className="main__card">
-          <ViewTable pick_stats={pick_stats} />
-        </div>
-        <div className="main__card">
-          <ViewTable pack_stats={pack_stats} />
-        </div>
-        <div className="main__card">
-          <ViewTable opu_stats={opu_stats} />
+          <ViewTable opu_stats={opu_results} />
         </div>
       </div>
     </>

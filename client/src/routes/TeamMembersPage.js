@@ -5,7 +5,7 @@ import TeamMembersApiService from "../services/team-members-api-service";
 import useToggle from "../Components/Hooks/useToggle";
 import Modal from "../Components/Modals/Modal";
 import TeamMemberModalForm from "../Components/Modals/TeamMemberModalForm";
-import "../css/main.css";
+import "../assets/css/main.css";
 
 export default function TeamMembersPage() {
   const { team_members, setTeamMembers, addTeamMember } = useContext(

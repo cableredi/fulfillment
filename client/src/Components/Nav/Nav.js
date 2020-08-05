@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import TokenService from "../../services/token-service";
-import '../../css/nav.css';
+import '../../assets/css/nav.css';
 
 export default class Nav extends Component {
   handleLogoutClick = () => {

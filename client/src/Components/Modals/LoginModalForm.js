@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useForm from "../Hooks/useForm";
 import AuthApiService from "../../services/auth-service";
 import ValidateError from "../ValidateError";
-import "../../css/form.css";
+import "../../assets/css/form.css";
 
 export default function LoginModalForm(props) {
   const { onLoginSuccess  } = props;

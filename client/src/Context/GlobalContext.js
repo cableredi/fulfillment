@@ -20,7 +20,7 @@ export const GlobalProvider = ({ children }) => {
 
   const addStat = (stat) => {
     dispatchStats({
-      type: "Add_STAT",
+      type: "ADD_STAT",
       payload: stat,
     });
   };

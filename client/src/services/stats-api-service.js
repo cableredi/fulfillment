@@ -2,8 +2,19 @@ import config from "../config";
 import TokenService from "./token-service";
 
 const ProductsApiService = {
-  getAllLastDay() {
-    return fetch(config.API_ENDPOINT_STATS + "/lastday", {
+  getAll() {
+    return fetch(config.API_ENDPOINT_STATS + "/all", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
+  },
+  getMaxDate(date) {
+    return fetch(config.API_ENDPOINT_STATS + "/date", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

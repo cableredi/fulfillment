@@ -58,29 +58,29 @@ teamMembersRouter
       .catch(next);
   });
 
-// teamMembersRouter
-// .route('/:team_member_id')
+teamMembersRouter
+.route('/:team_member_id')
 
-// .all((req, res, next) => {
-//   TeamMembersService.getById(
-//     req.app.get('db'),
-//     req.params.team_member_id
-//   )
-//     .then(teamMember => {
-//       if (!teamMember) {
-//         return res.status(404).json({
-//           error: { message: 'Team member Not Found' }
-//         })
-//       }
-//       res.teamMember = teamMember
-//       next()
-//     })
-//     .catch()
-// })
+.all((req, res, next) => {
+  TeamMembersService.getById(
+    req.app.get('db'),
+    req.params.team_member_id
+  )
+    .then(teamMember => {
+      if (!teamMember) {
+        return res.status(404).json({
+          error: { message: 'Team member Not Found' }
+        })
+      }
+      res.teamMember = teamMember
+      next()
+    })
+    .catch()
+})
 
-// .get((req, res) => {
-//   res.json(serializeTeamMembers(res.teamMember))
-// })
+.get((req, res) => {
+  res.json(serializeTeamMembers(res.teamMember))
+})
 
 // .patch(jsonParser, (req, res, next) => {
 //   const {
