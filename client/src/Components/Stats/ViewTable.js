@@ -1,65 +1,40 @@
 import React from "react";
-import {
-  BarChart,
-  Bar,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { formattedDate } from '../../Utils/formattedDate';
+import Table from "react-bootstrap/Table";
 
 export default function ViewTable(props) {
-  const { opu_stats } = props;
+  const { stats, title } = props;
 
-  const data = opu_stats;
-
-  let team_members = [];
-
-  data.forEach((item) => {
-    Object.keys(item).forEach((key, index) => {
-      if (key !== "name") {
-        if (!team_members.includes(key)) {
-          team_members.push(key);
-        }
-      }
-    });
-  });
-
-  console.log(data);
-  team_members.forEach((member) => {
-    console.log(member);
-  });
-
-  const colors = ["#ff0000", "#0000cc", "#00ff00", "#6600cc", "#993333", "#ffff00", "#00ffff"];
+  const getTableRows = (stat) => (
+    <tr key = {stat.stat_id}>
+      <td>{stat.stat_type.toUpperCase()}</td>
+      <td>{stat.first_name + " " + stat.last_name}</td>
+      <td>{formattedDate(stat.stat_date)}</td>
+      <td>{stat.total}</td>
+      <td>{stat.percent}</td>
+      <td>{stat.inf}</td>
+    </tr>
+  )
 
   return (
     <>
-      <div className="ViewTable">
-        <h1>OPU Total Picked</h1>
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
+      <h1>{title} Statistics</h1>
+      <Table striped bordered hover size="sm">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Total</th>
+            <th>Percent</th>
+            <th>INF</th>
+          </tr>
+        </thead>
 
-          {team_members.map((member, index) => {
-            return (<Bar dataKey={`${member}`} fill={`${colors[index]}`} />);
-          })}
-        </BarChart>
-      </div>
+        <tbody>
+          {stats.map(stat => getTableRows(stat))}
+        </tbody>
+      </Table>
     </>
   );
 }

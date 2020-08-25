@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import Nav from "../Components/Nav/Nav";
+import Navigation from "../Components/Navigation/Navigation";
 import AddStatisticsModalForm from "../Components/Modals/AddStatisticsModalForm";
 import StatsApiService from "../services/stats-api-service";
 import { GlobalContext } from "../Context/GlobalContext";
 import useToggle from "../Components/Hooks/useToggle";
-import Modal from "../Components/Modals/Modal";
-import {getFormattedDate} from '../helpers/formattedDate';
-import "../assets/css/main.css";
-import "../assets/css/table.css";
+import { formattedDate } from "../Utils/formattedDate";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Table from "react-bootstrap/Table";
 
 export default function Statistics() {
   const { stats, setStats, addStat } = useContext(GlobalContext);
@@ -30,7 +31,7 @@ export default function Statistics() {
       <td className="table-name">
         {stat.first_name} {stat.last_name}
       </td>
-      <td className="table-date">{getFormattedDate(stat.stat_date)}</td>
+      <td className="table-date">{formattedDate(stat.stat_date)}</td>
       <td className="table-type">{stat.stat_type}</td>
       <td className="table-total">{stat.total}</td>
       <td className="table-percent">{stat.percent}</td>
@@ -38,36 +39,50 @@ export default function Statistics() {
     </tr>
   ));
 
+  const handleClose = () => setOpenAddStat(false);
+
   return (
     <>
-      <Nav />
-      <div className="main">
-        <div className="main__card">
-          <h1>Statistcs</h1>
-          <div>
-            <h2>Last Day Entered</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th className="table-name">Name</th>
-                  <th className="table-date">Date</th>
-                  <th className="table-type">Type</th>
-                  <th className="table-total">Total</th>
-                  <th className="table-percent">Percent</th>
-                  <th className="table-inf">INF Percent</th>
-                </tr>
-              </thead>
-              <tbody>{getLastDaysStats}</tbody>
-            </table>
+      <Navigation />
+      <Container>
+        <div className="main">
+          <div className="main__card">
+            <h1>Statistcs</h1>
+            <div>
+              <h2>Last Day Entered</h2>
+              <Table striped bordered hover size="sm">
+                <thead>
+                  <tr>
+                    <th className="table-name">Name</th>
+                    <th className="table-date">Date</th>
+                    <th className="table-type">Type</th>
+                    <th className="table-total">Total</th>
+                    <th className="table-percent">Percent</th>
+                    <th className="table-inf">INF Percent</th>
+                  </tr>
+                </thead>
+                <tbody>{getLastDaysStats}</tbody>
+              </Table>
+            </div>
+
+            <Button onClick={() => setOpenAddStat()}>Add New Data</Button>
+
+            {openAddStat && (
+              <Modal show={openAddStat} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Add Statistics</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                  <AddStatisticsModalForm
+                    onSubmit={(stat) => handleSubmit(stat)}
+                  />
+                </Modal.Body>
+              </Modal>
+            )}
           </div>
-          <button onClick={() => setOpenAddStat()}>Add New Data</button>
-          {openAddStat && (
-            <Modal open={openAddStat} toggle={setOpenAddStat}>
-              <AddStatisticsModalForm onSubmit={(stat) => handleSubmit(stat)} />
-            </Modal>
-          )}
         </div>
-      </div>
+      </Container>
     </>
   );
 }

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import useForm from "../Hooks/useForm";
 import TeamMembersApiService from "../../services/team-members-api-service";
 import ValidateError from "../ValidateError";
-import "../../assets/css/form.css";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 export default function TeamMemberModalForm(props) {
   const { onSubmit } = props;
@@ -12,8 +13,6 @@ export default function TeamMemberModalForm(props) {
     first_name: { value: "", error: "" },
     last_name: { value: "", error: "" },
   };
-
-  const Required = () => <span className="Form__required">*</span>;
 
   /***********************/
   /* handleSubmitJWTAuth */
@@ -54,55 +53,43 @@ export default function TeamMemberModalForm(props) {
   const { first_name, last_name } = values;
 
   return (
-    <form className="Form" onSubmit={handleOnSubmit}>
-      <div className="Form__header">Add Team Member</div>
-
+    <Form className="Form" onSubmit={handleOnSubmit}>
       {apiError && <div className="Form__error">{apiError}</div>}
-      <ul className="Form__outer">
-        <li className="first_name">
-          <label htmlFor="first_name">
-            First Name
-            <Required />
-          </label>
-          <input
-            required
-            name="first_name"
-            id="first_name"
-            value={first_name}
-            onChange={handleOnChange}
-          />
-        </li>
-        <li>
+
+      <Form.Group controlId="first_name">
+        <Form.Label>First Name</Form.Label>
+        <Form.Control
+          required
+          name="first_name"
+          value={first_name}
+          onChange={handleOnChange}
+        />
+        <div>
           {errors.first_name && dirty.first_name && (
             <ValidateError message={errors.first_name} />
           )}
-        </li>
+        </div>
+      </Form.Group>
 
-        <li className="last_name">
-          <label htmlFor="last_name">
-            Last Name
-            <Required />
-          </label>
-          <input
-            required
-            name="last_name"
-            type="last_name"
-            id="last_name"
-            value={last_name}
-            onChange={handleOnChange}
-          />
-        </li>
-        <li>
+      <Form.Group controlId="last_name">
+        <Form.Label>Last Name</Form.Label>
+        <Form.Control
+          required
+          name="last_name"
+          type="last_name"
+          value={last_name}
+          onChange={handleOnChange}
+        />
+        <div>
           {errors.last_name && dirty.last_name && (
             <ValidateError message={errors.last_name} />
           )}
-        </li>
-        <li className="Form__button">
-          <button className="button" type="submit" disabled={disable}>
-            Submit
-          </button>
-        </li>
-      </ul>
-    </form>
+        </div>
+      </Form.Group>
+
+      <Button className="button" type="submit" disabled={disable}>
+        Submit
+      </Button>
+    </Form>
   );
 }

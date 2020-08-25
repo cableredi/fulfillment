@@ -4,10 +4,9 @@ import ValidateError from "../ValidateError";
 import StatisticsApiService from "../../services/stats-api-service";
 import TeamMembersApiService from "../../services/team-members-api-service";
 import DatePicker from "react-datepicker";
-import "../../assets/css/form.css";
 import "react-datepicker/dist/react-datepicker.css";
-
-const Required = () => <span className="Form__required">*</span>;
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 export default function AddStatistics(props) {
   const { onSubmit } = props;
@@ -101,157 +100,105 @@ export default function AddStatistics(props) {
   teamMemberOptions.sort();
 
   return (
-    <>
-      <h1>Add Statistics</h1>
-      <form className="Statistics__form" onSubmit={handleOnSubmit}>
-        <div className="required">* Required Fields</div>
+    <Form className="Statistics__form" onSubmit={handleOnSubmit}>
+      {apiError && <div className="Form__error">{apiError}</div>}
 
-        <ul className="Form__outer">
-          <li>
-            <label htmlFor="team_member_id">
-              Team Member:
-              <Required />
-            </label>
-            <select
-              id="team_member_id"
-              name="team_member_id"
-              className="formSelect"
-              aria-label="Select a Team Member"
-              aria-required="true"
-              value={team_member_id}
-              onChange={handleOnChange}
-            >
-              <option value="">Team Member... </option>
-              {teamMemberOptions}
-            </select>
-          </li>
-          <li>
-            {errors.team_member_id && dirty.team_member_id && (
-              <ValidateError message={errors.team_member_id} />
-            )}
-          </li>
+      <Form.Group controlId="team_member_id">
+        <Form.Label>Team Member</Form.Label>
+        <Form.Control
+          as="select"
+          name="team_member_id"
+          className="formSelect"
+          aria-label="Select a Team Member"
+          aria-required="true"
+          value={team_member_id}
+          onChange={handleOnChange}
+        >
+          <option value="">Add Team Member... </option>
+          {teamMemberOptions}
+        </Form.Control>
+        <div>
+          {errors.team_member_id && dirty.team_member_id && (
+            <ValidateError message={errors.team_member_id} />
+          )}
+        </div>
+      </Form.Group>
 
-          <li>
-            <label htmlFor="stat_type">
-              Type:
-              <Required />
-            </label>
-            <div className="formRadio">
-              <input
-                type="radio"
-                value="ship"
-                name="stat_type"
-                id="stat_type_ship"
-                onChange={handleOnChange}
-              />
-              <label htmlFor="stat_type_ship">SHIP</label>
+      <div key={`stat_type`} className="mb-3">
+        <Form.Label>Type: </Form.Label>
+        <Form.Check inline label="OPU" type="radio" id="stat_type_opu" />
+        <Form.Check inline label="SHIP" type="radio" id="stat_type_ship" />
+        <Form.Check inline label="PACK" type="radio" id="stat_type_pack" />
+        <div>
+          {errors.stat_type && dirty.stat_type && (
+            <ValidateError message={errors.stat_type} />
+          )}
+        </div>
+      </div>
 
-              <input
-                type="radio"
-                value="opu"
-                name="stat_type"
-                id="stat_type_opu"
-                onChange={handleOnChange}
-              />
-              <label htmlFor="stat_type_opu">OPU</label>
+      <Form.Group controlId="date">
+        <Form.Label>Date</Form.Label>
+        <DatePicker
+          name="date"
+          id="date"
+          selected={startDate}
+          onChange={(startDate) => setStartDate(startDate)}
+          value={startDate}
+        />
+        <div>
+          {errors.date && dirty.date && <ValidateError message={errors.date} />}
+        </div>
+      </Form.Group>
 
-              <input
-                type="radio"
-                value="pack"
-                name="stat_type"
-                id="stat_type_pack"
-                onChange={handleOnChange}
-              />
-              <label htmlFor="stat_type_pack">PACK</label>
-            </div>
-          </li>
-          <li>
-            {errors.stat_type && dirty.stat_type && (
-              <ValidateError message={errors.stat_type} />
-            )}
-          </li>
+      <Form.Group controlId="total">
+        <Form.Label>Total</Form.Label>
+        <Form.Control
+          type="text"
+          name="total"
+          placeholder="0"
+          value={total}
+          onChange={handleOnChange}
+        />
+        <div>
+          {errors.total && dirty.total && (
+            <ValidateError message={errors.total} />
+          )}
+        </div>
+      </Form.Group>
 
-          <li>
-            <label htmlFor="date">
-              Date:
-              <Required />
-            </label>
-            <DatePicker
-              name="date"
-              id="date"
-              selected={startDate}
-              onChange={(startDate) => setStartDate(startDate)}
-              value={startDate}
-            />
-          </li>
-          <li>
-            {errors.date && dirty.date && (
-              <ValidateError message={errors.date} />
-            )}
-          </li>
+      <Form.Group controlId="percent">
+        <Form.Label>Percent</Form.Label>
+        <Form.Control
+          type="text"
+          name="percent"
+          placeholder="0"
+          value={percent}
+          onChange={handleOnChange}
+        />
+        <div>
+          {errors.percent && dirty.percent && (
+            <ValidateError message={errors.percent} />
+          )}
+        </div>
+      </Form.Group>
 
-          <li>
-            <label htmlFor="total">
-              Total:
-              <Required />
-            </label>
-            <input
-              type="text"
-              name="total"
-              id="total"
-              placeholder="0"
-              value={total}
-              onChange={handleOnChange}
-            />
-          </li>
-          <li>
-            {errors.total && dirty.total && (
-              <ValidateError message={errors.total} />
-            )}
-          </li>
+      <Form.Group controlId="inf">
+        <Form.Label>INF</Form.Label>
+        <Form.Control
+          type="text"
+          id="inf"
+          placeholder="0"
+          value={inf}
+          onChange={handleOnChange}
+        />
+        <div>
+          {errors.inf && dirty.inf && <ValidateError message={errors.inf} />}
+        </div>
+      </Form.Group>
 
-          <li>
-            <label htmlFor="percent">
-              Percent:
-              <Required />
-            </label>
-            <input
-              type="text"
-              name="percent"
-              id="percent"
-              placeholder="0"
-              value={percent}
-              onChange={handleOnChange}
-            />
-          </li>
-          <li>
-            {errors.percent && dirty.percent && (
-              <ValidateError message={errors.percent} />
-            )}
-          </li>
-
-          <li>
-            <label htmlFor="inf">INF:</label>
-            <input
-              type="text"
-              name="inf"
-              id="inf"
-              placeholder="0"
-              value={inf}
-              onChange={handleOnChange}
-            />
-          </li>
-          <li>
-            {errors.inf && dirty.inf && <ValidateError message={errors.inf} />}
-          </li>
-
-          <li className="Form__button">
-            <button className="button" type="submit" disabled={disable}>
-              Submit
-            </button>
-          </li>
-        </ul>
-      </form>
-    </>
+      <Button className="button" type="submit" disabled={disable}>
+        Submit
+      </Button>
+    </Form>
   );
 }

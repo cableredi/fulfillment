@@ -1,23 +1,31 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import Nav from "../Components/Nav/Nav";
-import "../assets/css/main.css";
+import Navigation from "../Components/Navigation/Navigation";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
 
 export default function MainPage() {
   return (
     <>
-      <Nav />
-      <div className="main">
-        <div className="main__card">
-          <NavLink to="/teammembers">Team members</NavLink>
-        </div>
-        <div className="main__card">
-          <NavLink to="/statistics">Statistics</NavLink>
-        </div>
-        <div className="main__card">
-          <NavLink to="/graphs">Graphs</NavLink>
-        </div>
-      </div>
+      <Navigation />
+      <Container>
+        <Nav variant="pills" >
+          <Nav.Item>
+            <Nav.Link href="/teammembers">Team members</Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link href="/statistics">Statistics</Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link href="/graphs">Graphs</Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link href="/tables">Tables</Nav.Link>
+          </Nav.Item>
+        </Nav>
+      </Container>
     </>
   );
 }

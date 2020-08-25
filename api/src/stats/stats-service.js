@@ -1,5 +1,5 @@
 const StatsService = {
-  getAllByDate(knex, startDate, endDate) {
+  getAll(knex, startDate, endDate) {
     return knex
       .select("*")
       .from("stats")

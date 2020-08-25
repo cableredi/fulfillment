@@ -7,11 +7,20 @@
   align-items: center;
 }
 
+.main__statistics {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .main__card {
   border: 1px solid black;
   border-radius: 5px;
   padding: 20px;
   background-color: #efefef;
+  margin-bottom: 20px;
 }
 
 .main__card h1 {

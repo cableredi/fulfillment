@@ -4,9 +4,10 @@ import TokenService from "../services/token-service";
 import AuthApiService from "../services/auth-service";
 import IdleService from "../services/idle-service";
 import useToggle from "../Components/Hooks/useToggle";
-import Modal from "../Components/Modals/Modal";
-import "../assets/css/landing.css";
 import { useHistory } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 export default function Welcome() {
   const [openLogin, setOpenLogin] = useToggle(false);
@@ -26,25 +27,32 @@ export default function Welcome() {
       AuthApiService.postRefreshToken();
     });
     setOpenLogin(false);
-    history.push('/main');
+    history.push("/main");
   };
 
+  const handleClose = () => setOpenLogin(false);
+
   return (
-    <>
+    <Container>
       <div className="Welcome">
         <h1 className="Welcome__name">Welcome</h1>
         <div className="spacer"></div>
         <div className="Welcome__nav">
-          <button onClick={() => setOpenLogin()}>Login</button>
+          <Button onClick={() => setOpenLogin()}>Login</Button>
         </div>
       </div>
       {openLogin && (
-        <Modal open={openLogin} toggle={setOpenLogin}>
-          <LoginModalForm
-            onLoginSuccess={() => handleLoginSuccess()}
-          />
+        <Modal show={openLogin} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Login</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <LoginModalForm onLoginSuccess={() => handleLoginSuccess()} />
+          </Modal.Body>
+
         </Modal>
       )}
-    </>
+    </Container>
   );
 }

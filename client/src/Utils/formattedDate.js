@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 
 //get create-date and convert to local timezone and format
-export const getFormattedDate = (date) => {
+export const formattedDate = (date) => {
   let createdDate = new Date(date);
   createdDate.toString();
 

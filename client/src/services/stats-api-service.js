@@ -1,7 +1,7 @@
 import config from "../config";
 import TokenService from "./token-service";
 
-const ProductsApiService = {
+const StatsApiService = {
   getAll() {
     return fetch(config.API_ENDPOINT_STATS + "/all", {
       method: "GET",
@@ -38,4 +38,4 @@ const ProductsApiService = {
   },
 };
 
-export default ProductsApiService;
+export default StatsApiService;
