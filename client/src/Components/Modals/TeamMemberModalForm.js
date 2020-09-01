@@ -87,7 +87,7 @@ export default function TeamMemberModalForm(props) {
         </div>
       </Form.Group>
 
-      <Button className="button" type="submit" disabled={disable}>
+      <Button size="lg" block className="button" type="submit" disabled={disable}>
         Submit
       </Button>
     </Form>

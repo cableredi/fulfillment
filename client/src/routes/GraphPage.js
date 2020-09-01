@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navigation from "../Components/Navigation/Navigation";
 import ViewGraph from "../Components/Stats/ViewGraph";
+import Footer from '../Components/Footer/Footer';
 import { formattedDate } from "../Utils/formattedDate";
 import Container from "react-bootstrap/Container";
 import FilterStatistics from "../Components/FilterStatistics/FilterStatistics";
@@ -8,7 +9,7 @@ import FilterStatistics from "../Components/FilterStatistics/FilterStatistics";
 export default function GraphPage() {
   const [displayGraph, setDisplayGraph] = useState(false);
   const [results, setResults] = useState([]);
-  const [type, setType] = useState('');
+  const [type, setType] = useState("");
 
   let graphStatistics = [];
   let index = {};
@@ -41,11 +42,14 @@ export default function GraphPage() {
   return (
     <>
       <Navigation />
-      <Container>
+
+      <Container className="mt-5">
         <FilterStatistics handleOnSubmit={onSubmit} />
 
         {displayGraph && <ViewGraph title={type} stats={results} />}
       </Container>
+
+      <Footer />
     </>
   );
 }

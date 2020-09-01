@@ -8,6 +8,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 
 export default function FilterStatistics(props) {
   const { handleOnSubmit } = props;
@@ -19,7 +20,7 @@ export default function FilterStatistics(props) {
   // form fields
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [teamMemberSelected, setTeamMemberSelected] = useState("All");
+  const [teamMemberSelected, setTeamMemberSelected] = useState("");
   const [typeSelected, setTypeSelected] = useState("");
 
   // selected statistics array
@@ -49,6 +50,9 @@ export default function FilterStatistics(props) {
 
     // filter Team Member
     let filterTeamMembers = [];
+
+    console.log("teamMemberSelected", "xxx" + teamMemberSelected + "yyy");
+
     if (teamMemberSelected !== "All") {
       filterTeamMembers = filterStats.filter(
         (stat) => stat.team_member_id === Number(teamMemberSelected)
@@ -86,93 +90,113 @@ export default function FilterStatistics(props) {
   ));
 
   return (
-    <Form className="Form__statPicker" onSubmit={onSubmitForm}>
-      <Row>
-        <Col xs={12} md={2}>
-          <div key={`stat_type`} className="mb-2 mr-sm-2">
-            <div>Type:</div>
-            <Form.Check
-              label="OPU"
-              type="radio"
-              id="stat_type_opu"
-              name="stat_type"
-              value="opu"
-              checked={typeSelected === "opu"}
-              onChange={(e) => setTypeSelected(e.target.value)}
-            />
-            <Form.Check
-              label="SHIP"
-              type="radio"
-              id="stat_type_ship"
-              name="stat_type"
-              value="ship"
-              checked={typeSelected === "ship"}
-              onChange={(e) => setTypeSelected(e.target.value)}
-            />
-            <Form.Check
-              label="PACK"
-              type="radio"
-              id="stat_type_pack"
-              name="stat_type"
-              value="pack"
-              checked={typeSelected === "pack"}
-              onChange={(e) => setTypeSelected(e.target.value)}
-            />
-          </div>
-        </Col>
-
-        <Col xs={12} md={4}>
-          <Form.Group controlId="team_member_id" className="mb-2 mr-sm-2">
-            <Form.Label>Team Member</Form.Label>
-            <Form.Control
-              as="select"
-              name="team_member_id"
-              className="formSelect"
-              aria-label="Select a Team Member"
-              aria-required="true"
-              value={teamMemberSelected}
-              onChange={(e) => setTeamMemberSelected(e.target.value)}
-            >
-              <option value="All">All </option>
-              {teamMemberOptions}
-            </Form.Control>
-          </Form.Group>
-        </Col>
-
-        <Col xs={12} md={2}>
-          <Form.Group controlId="date" className="mb-2 mr-sm-2">
-            <Form.Label>Date</Form.Label>
-            <div>
-              <div>
-                <Form.Label>From: </Form.Label>
-                <DatePicker
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                  selectsStart
-                  startDate={startDate}
-                  endDate={endDate}
+    <Card>
+      <Card.Header as="h3">
+        Please choose the options you'd like to chart:
+      </Card.Header>
+      <Card.Body className="mx-5">
+        <Form className="Form__statPicker" onSubmit={onSubmitForm}>
+          <Row>
+            <Col xs={12} md={2}>
+              <div key={`stat_type`} className="mb-2 mr-sm-2">
+                <Form.Label className="font-weight-bold mr-2">Type:</Form.Label>
+                <Form.Check
+                  label="OPU"
+                  type="radio"
+                  id="stat_type_opu"
+                  name="stat_type"
+                  value="opu"
+                  checked={typeSelected === "opu"}
+                  onChange={(e) => setTypeSelected(e.target.value)}
+                />
+                <Form.Check
+                  label="SHIP"
+                  type="radio"
+                  id="stat_type_ship"
+                  name="stat_type"
+                  value="ship"
+                  checked={typeSelected === "ship"}
+                  onChange={(e) => setTypeSelected(e.target.value)}
+                />
+                <Form.Check
+                  label="PACK"
+                  type="radio"
+                  id="stat_type_pack"
+                  name="stat_type"
+                  value="pack"
+                  checked={typeSelected === "pack"}
+                  onChange={(e) => setTypeSelected(e.target.value)}
                 />
               </div>
-              <div>
-                <Form.Label>To: </Form.Label>
-                <DatePicker
-                  selected={endDate}
-                  onChange={(date) => setEndDate(date)}
-                  selectsEnd
-                  startDate={startDate}
-                  endDate={endDate}
-                  minDate={startDate}
-                />
-              </div>
-            </div>
+            </Col>
+
+            <Col xs={12} md={4}>
+              <Form.Group controlId="team_member_id" className="mb-2 mr-sm-2">
+                <Form.Label className="font-weight-bold mr-2">
+                  Team Member:
+                </Form.Label>
+                <Form.Control
+                  as="select"
+                  name="team_member_id"
+                  className="formSelect"
+                  aria-label="Select a Team Member"
+                  aria-required="true"
+                  value={teamMemberSelected}
+                  onChange={(e) => setTeamMemberSelected(e.target.value)}
+                >
+                  <option value="">Select a Team Member...</option>
+                  <option value="All">All</option>
+                  {teamMemberOptions}
+                </Form.Control>
+              </Form.Group>
+            </Col>
+
+            <Col xs={12} md={2}>
+              <Form.Group controlId="date" className="mb-2 mr-sm-2">
+                <Form.Label className="font-weight-bold mr-2">Date:</Form.Label>
+                <Row>
+                  <Col className="form__datePicker">
+                    <Form.Label className="font-weight-bold mr-2">
+                      From:{" "}
+                    </Form.Label>
+                    <DatePicker
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
+                      selectsStart
+                      startDate={startDate}
+                      endDate={endDate}
+                    />
+                  </Col>
+                </Row>
+                <Row className="mt-2">
+                  <Col className="form__datePicker">
+                    <Form.Label className="font-weight-bold mr-2">
+                      To:{" "}
+                    </Form.Label>
+                    <DatePicker
+                      selected={endDate}
+                      onChange={(date) => setEndDate(date)}
+                      selectsEnd
+                      startDate={startDate}
+                      endDate={endDate}
+                      minDate={startDate}
+                    />
+                  </Col>
+                </Row>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Form.Group>
+            <Col xs={12} className="text-center">
+              <Button type="submit" className="mb-2 mr-sm-2" block>
+                Submit
+              </Button>
+            </Col>
           </Form.Group>
-        </Col>
-        <Col xs={12} md={2}>
-          <Button type="submit" className="mb-2 mr-sm-2">
-            Submit
-          </Button>
-        </Col>
-      </Row>
-    </Form>
+
+        </Form>
+      </Card.Body>
+    </Card>
   );
 }

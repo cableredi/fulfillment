@@ -9,6 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import Card from "react-bootstrap/Card";
 
 export default function ViewGraph(props) {
   const { stats, title } = props;
@@ -57,9 +58,10 @@ export default function ViewGraph(props) {
   };
 
   return (
-    <>
-      <div className="ViewGraph">
-        <h1>{title.toUpperCase()} Total Picked</h1>
+    <Card className="mt-3 mb-5">
+      <Card.Header as="h3">{title.toUpperCase()} Total Picked</Card.Header>
+
+      <Card.Body>
         <ResponsiveContainer minWidth={300} minHeight={300}>
           <BarChart
             data={data}
@@ -89,7 +91,7 @@ export default function ViewGraph(props) {
             })}
           </BarChart>
         </ResponsiveContainer>
-      </div>
-    </>
+      </Card.Body>
+    </Card>
   );
 }

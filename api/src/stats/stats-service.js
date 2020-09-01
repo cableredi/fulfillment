@@ -12,11 +12,8 @@ const StatsService = {
   },
   getMaxDate(knex) {
     return knex.raw(`
-      SELECT *
+      SELECT MAX(stat_date) as max_date
       FROM stats
-      JOIN team_members ON team_members.team_member_id = stats.team_member_id
-      WHERE stat_date =
-        (SELECT MAX(stat_date) as max_date FROM stats)
     `);
   },
   getAll(knex) {

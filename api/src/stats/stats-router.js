@@ -38,7 +38,7 @@ statsRouter
   .get((req, res, next) => {
     StatsService.getMaxDate(req.app.get("db"))
       .then((stats) => {
-        res.json(stats.rows.map(serializeStatsMember));
+        res.json(stats.rows[0]);
       })
       .catch(next);
   });

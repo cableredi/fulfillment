@@ -1,11 +1,13 @@
 import React from "react";
 import LoginModalForm from "../Components/Modals/LoginModalForm";
+import Footer from "../Components/Footer/Footer";
 import TokenService from "../services/token-service";
 import AuthApiService from "../services/auth-service";
 import IdleService from "../services/idle-service";
 import useToggle from "../Components/Hooks/useToggle";
 import { useHistory } from "react-router-dom";
 import Container from "react-bootstrap/Container";
+import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
@@ -33,26 +35,30 @@ export default function Welcome() {
   const handleClose = () => setOpenLogin(false);
 
   return (
-    <Container>
-      <div className="Welcome">
-        <h1 className="Welcome__name">Welcome</h1>
-        <div className="spacer"></div>
-        <div className="Welcome__nav">
-          <Button onClick={() => setOpenLogin()}>Login</Button>
-        </div>
-      </div>
-      {openLogin && (
-        <Modal show={openLogin} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Login</Modal.Title>
-          </Modal.Header>
+    <>
+      <Container className="mt-5">
+        <Card className="text-center m-auto">
+          <Card.Header as="h1">Welcome to Fulfillment</Card.Header>
+          <Card.Body>
+            <Button variant="primary" onClick={() => setOpenLogin()}>
+              Login
+            </Button>
+          </Card.Body>
+        </Card>
+        {openLogin && (
+          <Modal show={openLogin} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Login</Modal.Title>
+            </Modal.Header>
 
-          <Modal.Body>
-            <LoginModalForm onLoginSuccess={() => handleLoginSuccess()} />
-          </Modal.Body>
-
-        </Modal>
-      )}
-    </Container>
+            <Modal.Body>
+              <LoginModalForm onLoginSuccess={() => handleLoginSuccess()} />
+            </Modal.Body>
+          </Modal>
+        )}
+      </Container>
+      
+      <Footer />
+    </>
   );
 }

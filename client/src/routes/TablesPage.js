@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navigation from "../Components/Navigation/Navigation";
 import ViewTable from "../Components/Stats/ViewTable";
+import Footer from '../Components/Footer/Footer';
 import FilterStatistics from '../Components/FilterStatistics/FilterStatistics';
 import "react-datepicker/dist/react-datepicker.css";
 import Container from "react-bootstrap/Container";
@@ -21,11 +22,13 @@ export default function TablesPage() {
     <>
       <Navigation />
 
-      <Container>
+      <Container className="mt-5">
         <FilterStatistics handleOnSubmit={onSubmit} />
 
         {displayTable && <ViewTable stats={statsSelected} />}
       </Container>
+
+      <Footer />
     </>
   );
 }

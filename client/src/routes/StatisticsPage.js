@@ -1,23 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navigation from "../Components/Navigation/Navigation";
 import AddStatisticsModalForm from "../Components/Modals/AddStatisticsModalForm";
+import Footer from "../Components/Footer/Footer";
 import StatsApiService from "../services/stats-api-service";
 import { GlobalContext } from "../Context/GlobalContext";
-import useToggle from "../Components/Hooks/useToggle";
 import { formattedDate } from "../Utils/formattedDate";
+import useToggle from "../Components/Hooks/useToggle";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 
 export default function Statistics() {
-  const { stats, setStats, addStat } = useContext(GlobalContext);
+  const { stats, addStat } = useContext(GlobalContext);
   const [openAddStat, setOpenAddStat] = useToggle(false);
   const [error, setError] = useState("");
+  const [lastDateEntered, setLastDateEntered] = useState("");
 
   useEffect(() => {
     StatsApiService.getMaxDate()
-      .then(setStats)
+      .then((data) => {
+        setLastDateEntered(data.max_date);
+      })
       .catch((error) => setError(error));
   }, []);
 
@@ -26,16 +31,11 @@ export default function Statistics() {
     setOpenAddStat(false);
   };
 
-  const getLastDaysStats = stats.map((stat) => (
+  const getStats = stats.map((stat) => (
     <tr key={stat.stat_id}>
-      <td className="table-name">
-        {stat.first_name} {stat.last_name}
-      </td>
-      <td className="table-date">{formattedDate(stat.stat_date)}</td>
-      <td className="table-type">{stat.stat_type}</td>
-      <td className="table-total">{stat.total}</td>
-      <td className="table-percent">{stat.percent}</td>
-      <td className="table-inf">{stat.inf}</td>
+      <td>{formattedDate(stat.stat_date)}</td>
+      <td>{stat.first_name + " " + stat.last_name}</td>
+      <td>{stat.stat_type}</td>
     </tr>
   ));
 
@@ -44,45 +44,51 @@ export default function Statistics() {
   return (
     <>
       <Navigation />
-      <Container>
-        <div className="main">
-          <div className="main__card">
-            <h1>Statistcs</h1>
-            <div>
-              <h2>Last Day Entered</h2>
-              <Table striped bordered hover size="sm">
-                <thead>
-                  <tr>
-                    <th className="table-name">Name</th>
-                    <th className="table-date">Date</th>
-                    <th className="table-type">Type</th>
-                    <th className="table-total">Total</th>
-                    <th className="table-percent">Percent</th>
-                    <th className="table-inf">INF Percent</th>
-                  </tr>
-                </thead>
-                <tbody>{getLastDaysStats}</tbody>
-              </Table>
-            </div>
 
-            <Button onClick={() => setOpenAddStat()}>Add New Data</Button>
+      <Container className="mt-5">
+        <Card className="main">
+          <Card.Header as="h1">Statistcs</Card.Header>
 
-            {openAddStat && (
-              <Modal show={openAddStat} onHide={handleClose}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Add Statistics</Modal.Title>
-                </Modal.Header>
+          <Card.Body className="mt-3 ml-2">
+            <h3 className="text-lg font-weight-bold d-inline">
+              Last Date Entered:{" "}
+            </h3>
 
-                <Modal.Body>
-                  <AddStatisticsModalForm
-                    onSubmit={(stat) => handleSubmit(stat)}
-                  />
-                </Modal.Body>
-              </Modal>
-            )}
-          </div>
-        </div>
+            <span className="text-sm font-weight-normal d-inline">
+              {lastDateEntered && formattedDate(lastDateEntered)}
+            </span>
+
+            <Table className="mt-5">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>{getStats}</tbody>
+            </Table>
+          </Card.Body>
+
+          <Button onClick={() => setOpenAddStat()}>Add New Data</Button>
+        </Card>
       </Container>
+      {openAddStat && (
+        <Modal show={openAddStat} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title className="font-weight-bold">
+              Add Statistics
+            </Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <AddStatisticsModalForm onSubmit={(stat) => handleSubmit(stat)} />
+          </Modal.Body>
+        </Modal>
+      )}
+
+      <Footer />
     </>
   );
 }

@@ -1079,3 +1079,41 @@
 {"message":"Cannot read property 'includes' of undefined","level":"error"}
 {"message":"state is not defined","level":"error"}
 {"message":"stat_type is not defined","level":"error"}
+{"message":"Statistics with id 362 created.","level":"info"}
+{"message":"Statistics with id 363 created.","level":"info"}
+{"message":"Statistics with id 364 created.","level":"info"}
+{"message":"Statistics with id 365 created.","level":"info"}
+{"message":"Statistics with id 366 created.","level":"info"}
+{"message":"Statistics with id 367 created.","level":"info"}
+{"message":"Statistics with id 368 created.","level":"info"}
+{"message":"Statistics with id 369 created.","level":"info"}
+{"message":"Statistics with id 370 created.","level":"info"}
+{"message":"Statistics with id 371 created.","level":"info"}
+{"message":"Statistics with id 372 created.","level":"info"}
+{"message":"Statistics with id 373 created.","level":"info"}
+{"message":"Statistics with id 374 created.","level":"info"}
+{"message":"Statistics with id 375 created.","level":"info"}
+{"message":"\n      SELECT stat.stat_date\n      FROM stats\n      WHERE stat_date =\n        (SELECT MAX(stat_date) as max_date FROM stats)\n     - missing FROM-clause entry for table \"stat\"","level":"error"}
+{"message":"\n      SELECT stat.stat_date\n      FROM stats\n      WHERE stat_date =\n        (SELECT MAX(stat_date) as max_date FROM stats)\n     - missing FROM-clause entry for table \"stat\"","level":"error"}
+{"message":"\n      SELECT MAX(stat.stat_date)\n      FROM stats\n     - missing FROM-clause entry for table \"stat\"","level":"error"}
+{"message":"stats is not defined","level":"error"}
+{"message":"Cannot read property 'max_date' of undefined","level":"error"}
+{"message":"Statistics with id 376 created.","level":"info"}
+{"message":"Statistics with id 377 created.","level":"info"}
+{"message":"Statistics with id 378 created.","level":"info"}
+{"message":"Statistics with id 379 created.","level":"info"}
+{"message":"Team member with id 35 created.","level":"info"}
+{"message":"Statistics with id 380 created.","level":"info"}
+{"message":"Statistics with id 381 created.","level":"info"}
+{"message":"Statistics with id 382 created.","level":"info"}
+{"message":"Statistics with id 383 created.","level":"info"}
+{"message":"Statistics with id 384 created.","level":"info"}
+{"message":"Statistics with id 385 created.","level":"info"}
+{"message":"Statistics with id 386 created.","level":"info"}
+{"message":"Statistics with id 387 created.","level":"info"}
+{"message":"Statistics with id 388 created.","level":"info"}
+{"message":"Statistics with id 389 created.","level":"info"}
+{"message":"Statistics with id 390 created.","level":"info"}
+{"message":"Statistics with id 391 created.","level":"info"}
+{"message":"Statistics with id 392 created.","level":"info"}
+{"message":"Statistics with id 393 created.","level":"info"}

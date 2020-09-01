@@ -94,7 +94,7 @@ export default function LoginModalForm(props) {
         </div>
       </Form.Group>
 
-      <Button size="lg" block type="submit" disabled={disable}>
+      <Button size="med" block type="submit" disabled={disable}>
         Login
       </Button>
     </Form>

@@ -13,7 +13,7 @@ export default function Navigation() {
     <>
       <Nav.Link href="/teammembers">Team Members</Nav.Link>
 
-      <Nav.Link href="/statistics">Statistics</Nav.Link>
+      <Nav.Link href="/statistics">Add Statistics</Nav.Link>
 
       <Nav.Link href="/graphs">Graphs</Nav.Link>
 

@@ -4,9 +4,12 @@ import { GlobalContext } from "../Context/GlobalContext";
 import TeamMembersApiService from "../services/team-members-api-service";
 import useToggle from "../Components/Hooks/useToggle";
 import TeamMemberModalForm from "../Components/Modals/TeamMemberModalForm";
+import Footer from '../Components/Footer/Footer';
 import Container from "react-bootstrap/Container";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/esm/Card";
+import ListGroup from 'react-bootstrap/esm/ListGroup';
 
 export default function TeamMembersPage() {
   const { team_members, setTeamMembers, addTeamMember } = useContext(
@@ -27,9 +30,9 @@ export default function TeamMembersPage() {
   };
 
   const getCurrentTeamMembers = team_members.map((member) => (
-    <li key={member.team_member_id}>
+    <ListGroup.Item key={member.team_member_id}>
       {member.first_name} {member.last_name}
-    </li>
+    </ListGroup.Item>
   ));
 
   const handleClose = () => setOpenAddName(false);
@@ -37,30 +40,36 @@ export default function TeamMembersPage() {
   return (
     <>
       <Navigation />
-      <Container>
-        <div className="main">
-          <div className="main__card">
-            <h1>Team Members</h1>
-            <div>
-              <h2>Current Team Members</h2>
-              <ul>{getCurrentTeamMembers}</ul>
-            </div>
+      
+      <Container className="mt-5">
+        <Card className="text-center m-auto">
+          <Card.Header as="h2">Team Members</Card.Header>
+
+          <Card.Title as="h3" className="mt-2">Current Team members</Card.Title>
+
+          <Card.Body className="mx-auto">
+            <ListGroup variant="flush">{getCurrentTeamMembers}</ListGroup>
+          </Card.Body>
+          <Card.Footer>
             <Button onClick={() => setOpenAddName()}>Add A Team Member</Button>
-            {openAddName && (
-              <Modal show={openAddName} onHide={handleClose}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Add New Team Members</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <TeamMemberModalForm
-                    onSubmit={(team_member) => handleSubmit(team_member)}
-                  />
-                </Modal.Body>
-              </Modal>
-            )}
-          </div>
-        </div>
+          </Card.Footer>
+        </Card>
       </Container>
+
+      {openAddName && (
+        <Modal show={openAddName} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add New Team Members</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <TeamMemberModalForm
+              onSubmit={(team_member) => handleSubmit(team_member)}
+            />
+          </Modal.Body>
+        </Modal>
+      )}
+
+      <Footer />
     </>
   );
 }

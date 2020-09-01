@@ -49,6 +49,10 @@ export default function AddStatistics(props) {
   const stateValidatorSchema = {
     team_member_id: {
       required: true,
+      validator: {
+        func: (value) => value.length > 0,
+        error: "Team member is required",
+      },
     },
     stat_type: {
       required: true,
@@ -90,7 +94,7 @@ export default function AddStatistics(props) {
     disable,
   } = useForm(stateSchema, stateValidatorSchema, onSubmitForm);
 
-  const { team_member_id, stat_type, total, percent, inf } = values;
+  const { team_member_id, stat_type, total, percent, inf } = values
 
   const teamMemberOptions = teamMembers.map((member, i) => (
     <option value={member.team_member_id} key={i}>
@@ -104,7 +108,7 @@ export default function AddStatistics(props) {
       {apiError && <div className="Form__error">{apiError}</div>}
 
       <Form.Group controlId="team_member_id">
-        <Form.Label>Team Member</Form.Label>
+        <Form.Label className="mr-2 font-weight-bold">Team Member</Form.Label>
         <Form.Control
           as="select"
           name="team_member_id"
@@ -124,11 +128,35 @@ export default function AddStatistics(props) {
         </div>
       </Form.Group>
 
-      <div key={`stat_type`} className="mb-3">
-        <Form.Label>Type: </Form.Label>
-        <Form.Check inline label="OPU" type="radio" id="stat_type_opu" />
-        <Form.Check inline label="SHIP" type="radio" id="stat_type_ship" />
-        <Form.Check inline label="PACK" type="radio" id="stat_type_pack" />
+      <div key={stat_type} className="mb-3">
+        <Form.Label className="mr-2 font-weight-bold">Type:</Form.Label>
+        <Form.Check
+          inline
+          label="OPU"
+          type="radio"
+          name="stat_type"
+          checked={stat_type === "opu"}
+          value="opu"
+          onChange={handleOnChange}
+        />
+        <Form.Check
+          inline
+          label="SHIP"
+          type="radio"
+          name="stat_type"
+          checked={stat_type === "ship"}
+          value="ship"
+          onChange={handleOnChange}
+        />
+        <Form.Check
+          inline
+          label="PACK"
+          type="radio"
+          name="stat_type"
+          checked={stat_type === "pack"}
+          value="pack"
+          onChange={handleOnChange}
+        />
         <div>
           {errors.stat_type && dirty.stat_type && (
             <ValidateError message={errors.stat_type} />
@@ -137,10 +165,9 @@ export default function AddStatistics(props) {
       </div>
 
       <Form.Group controlId="date">
-        <Form.Label>Date</Form.Label>
+        <Form.Label className="mr-2 font-weight-bold">Date:{' '}</Form.Label>
         <DatePicker
           name="date"
-          id="date"
           selected={startDate}
           onChange={(startDate) => setStartDate(startDate)}
           value={startDate}
@@ -151,7 +178,7 @@ export default function AddStatistics(props) {
       </Form.Group>
 
       <Form.Group controlId="total">
-        <Form.Label>Total</Form.Label>
+        <Form.Label className="mr-2 font-weight-bold">Total:{' '}</Form.Label>
         <Form.Control
           type="text"
           name="total"
@@ -167,7 +194,7 @@ export default function AddStatistics(props) {
       </Form.Group>
 
       <Form.Group controlId="percent">
-        <Form.Label>Percent</Form.Label>
+        <Form.Label className="mr-2 font-weight-bold">Percent:{' '}</Form.Label>
         <Form.Control
           type="text"
           name="percent"
@@ -183,10 +210,10 @@ export default function AddStatistics(props) {
       </Form.Group>
 
       <Form.Group controlId="inf">
-        <Form.Label>INF</Form.Label>
+        <Form.Label className="mr-2 font-weight-bold">INF:{' '}</Form.Label>
         <Form.Control
           type="text"
-          id="inf"
+          name="inf"
           placeholder="0"
           value={inf}
           onChange={handleOnChange}
