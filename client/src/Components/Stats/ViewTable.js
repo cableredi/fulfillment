@@ -8,12 +8,12 @@ export default function ViewTable(props) {
 
   const getTableRows = (stat) => (
     <tr key={stat.stat_id}>
-      <td>{stat.stat_type.toUpperCase()}</td>
-      <td>{stat.first_name + " " + stat.last_name}</td>
-      <td>{formattedDate(stat.stat_date)}</td>
-      <td>{stat.total}</td>
-      <td>{stat.percent}</td>
-      <td>{stat.inf}</td>
+      <td className="table__type">{stat.stat_type.toUpperCase()}</td>
+      <td className="table__name">{stat.first_name + " " + stat.last_name}</td>
+      <td className="table__type">{formattedDate(stat.stat_date)}</td>
+      <td className="table__total">{stat.total}</td>
+      <td className="table__percent">{stat.percent}</td>
+      <td className="table__inf">{stat.inf}</td>
     </tr>
   );
 

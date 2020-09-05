@@ -28,14 +28,15 @@ export default function Statistics() {
 
   const handleSubmit = (stat) => {
     addStat(stat);
+    setLastDateEntered(stat.stat_date);
     setOpenAddStat(false);
   };
 
   const getStats = stats.map((stat) => (
     <tr key={stat.stat_id}>
-      <td>{formattedDate(stat.stat_date)}</td>
-      <td>{stat.first_name + " " + stat.last_name}</td>
-      <td>{stat.stat_type}</td>
+      <td className="table__date">{formattedDate(stat.stat_date)}</td>
+      <td className="table__name">{stat.first_name + " " + stat.last_name}</td>
+      <td className="table__type">{stat.stat_type}</td>
     </tr>
   ));
 
@@ -45,7 +46,7 @@ export default function Statistics() {
     <>
       <Navigation />
 
-      <Container className="mt-5">
+      <Container className="mt-4">
         <Card className="main">
           <Card.Header as="h1">Statistcs</Card.Header>
 

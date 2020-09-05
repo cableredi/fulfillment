@@ -24,7 +24,7 @@ export default function GraphPage() {
         graphStatistics.push(index[stat.stat_date]);
       }
 
-      index[stat.stat_date][stat.first_name] = Number(stat.total);
+      index[stat.stat_date][stat.first_name] = Number(stat.percent);
     });
 
     setResults(graphStatistics);
@@ -43,7 +43,7 @@ export default function GraphPage() {
     <>
       <Navigation />
 
-      <Container className="mt-5">
+      <Container className="mt-4">
         <FilterStatistics handleOnSubmit={onSubmit} />
 
         {displayGraph && <ViewGraph title={type} stats={results} />}

@@ -61,21 +61,21 @@ export default function ViewGraph(props) {
     <Card className="mt-3 mb-5">
       <Card.Header as="h3">{title.toUpperCase()} Total Picked</Card.Header>
 
-      <Card.Body>
+      <Card.Body className="ViewGraph__card-body">
         <ResponsiveContainer minWidth={300} minHeight={300}>
           <BarChart
             data={data}
             margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
+              top: 20,
+              left: 10,
+              right: 10,
+              bottom: 10,
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" height={100} tick={CustomizedAxisTick} />
             <YAxis
-              label={{ value: "Total", angle: -90, position: "insideLeft" }}
+              label={{ value: "Percent (%)", angle: -90, position: "insideLeft" }}
             />
             <Tooltip />
             <Legend iconType="circle" />

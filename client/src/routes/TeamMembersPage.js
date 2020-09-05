@@ -41,7 +41,7 @@ export default function TeamMembersPage() {
     <>
       <Navigation />
       
-      <Container className="mt-5">
+      <Container className="mt-4">
         <Card className="text-center m-auto">
           <Card.Header as="h2">Team Members</Card.Header>
 

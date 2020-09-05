@@ -2,9 +2,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
 
 $text-color: $black;
+$alt-text-color: #EAEBED;
 $border-color: $black;
-$bg-color: #efefef;
+$bg-color: #EAEBED;
 $error: red;
+$card-header: #006989;
+$button-color: #007090;
+$button-hover-color: #01A7C2;
 
 body {
   font-family: "Shadows Into Light", cursive;
@@ -54,4 +58,53 @@ a {
   background-color: $bg-color;
   padding: 10px;
   font-size: 14px;
+  margin-top: 20px;
+}
+
+.card-header {
+  background-color: $card-header;
+  color: $alt-text-color;
+}
+
+.btn-primary {
+  background-color: $button-color;
+  color: $text-color;
+  &:hover {
+    background-color: $button-hover-color;
+  }
+}
+
+.form-check {
+  display: inline-block;
+  margin-right: 13px;
+}
+
+.table__date,
+.table__type,
+.table__name,
+.table__total,
+.table__percent,
+.table__inf {
+  text-align: center;
+}
+
+#total.form-control,
+#percent.form-control,
+#inf.form-control {
+  width: 75px !important;
+}
+
+.ViewGraph__card-body {
+  padding: 5px;
+}
+
+@media (min-width: 720px) {
+  .form__label-type {
+    display: block !important;
+    margin-right: 13px;
+  }
+
+  .ViewGraph__card-body {
+    padding: 1.25rem;
+  }
 }

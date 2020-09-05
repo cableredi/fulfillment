@@ -51,8 +51,6 @@ export default function FilterStatistics(props) {
     // filter Team Member
     let filterTeamMembers = [];
 
-    console.log("teamMemberSelected", "xxx" + teamMemberSelected + "yyy");
-
     if (teamMemberSelected !== "All") {
       filterTeamMembers = filterStats.filter(
         (stat) => stat.team_member_id === Number(teamMemberSelected)
@@ -94,12 +92,14 @@ export default function FilterStatistics(props) {
       <Card.Header as="h3">
         Please choose the options you'd like to chart:
       </Card.Header>
-      <Card.Body className="mx-5">
+      <Card.Body className="mx-5-lg mx-3-med mx-2-sm">
         <Form className="Form__statPicker" onSubmit={onSubmitForm}>
           <Row>
-            <Col xs={12} md={2}>
+            <Col sm={"auto"}>
               <div key={`stat_type`} className="mb-2 mr-sm-2">
-                <Form.Label className="font-weight-bold mr-2">Type:</Form.Label>
+                <Form.Label className="font-weight-bold mr-2 form__label-type">
+                  Type:
+                </Form.Label>
                 <Form.Check
                   label="OPU"
                   type="radio"
@@ -130,7 +130,7 @@ export default function FilterStatistics(props) {
               </div>
             </Col>
 
-            <Col xs={12} md={4}>
+            <Col sm={"auto"}>
               <Form.Group controlId="team_member_id" className="mb-2 mr-sm-2">
                 <Form.Label className="font-weight-bold mr-2">
                   Team Member:
@@ -151,9 +151,11 @@ export default function FilterStatistics(props) {
               </Form.Group>
             </Col>
 
-            <Col xs={12} md={2}>
+            <Col sm={"auto"}>
               <Form.Group controlId="date" className="mb-2 mr-sm-2">
-                <Form.Label className="font-weight-bold mr-2">Date:</Form.Label>
+                <Form.Label className="font-weight-bold mr-2">
+                  Date Pick/Packed:
+                </Form.Label>
                 <Row>
                   <Col className="form__datePicker">
                     <Form.Label className="font-weight-bold mr-2">
@@ -187,14 +189,15 @@ export default function FilterStatistics(props) {
             </Col>
           </Row>
 
-          <Form.Group>
-            <Col xs={12} className="text-center">
-              <Button type="submit" className="mb-2 mr-sm-2" block>
-                Submit
-              </Button>
-            </Col>
-          </Form.Group>
-
+          <Row>
+            <Form.Group>
+              <Col className="text-center">
+                <Button type="submit" className="mb-2 mr-sm-2" block>
+                  Submit
+                </Button>
+              </Col>
+            </Form.Group>
+          </Row>
         </Form>
       </Card.Body>
     </Card>

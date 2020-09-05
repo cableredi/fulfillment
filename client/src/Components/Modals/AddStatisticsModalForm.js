@@ -7,12 +7,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
 
 export default function AddStatistics(props) {
   const { onSubmit } = props;
   const [apiError, setApiError] = useState("");
   const [teamMembers, setTeamMembers] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState('');
 
   const stateSchema = {
     team_member_id: { value: "", error: "" },
@@ -34,7 +35,7 @@ export default function AddStatistics(props) {
     setApiError("");
     let stats = state;
 
-    stats.date = startDate;
+    stats.stat_date = startDate;
 
     StatisticsApiService.addStatistics(stats)
       .then((statistics) => {
@@ -94,7 +95,7 @@ export default function AddStatistics(props) {
     disable,
   } = useForm(stateSchema, stateValidatorSchema, onSubmitForm);
 
-  const { team_member_id, stat_type, total, percent, inf } = values
+  const { team_member_id, stat_type, total, percent, inf } = values;
 
   const teamMemberOptions = teamMembers.map((member, i) => (
     <option value={member.team_member_id} key={i}>
@@ -165,7 +166,7 @@ export default function AddStatistics(props) {
       </div>
 
       <Form.Group controlId="date">
-        <Form.Label className="mr-2 font-weight-bold">Date:{' '}</Form.Label>
+        <Form.Label className="mr-2 font-weight-bold">Date: </Form.Label>
         <DatePicker
           name="date"
           selected={startDate}
@@ -178,14 +179,20 @@ export default function AddStatistics(props) {
       </Form.Group>
 
       <Form.Group controlId="total">
-        <Form.Label className="mr-2 font-weight-bold">Total:{' '}</Form.Label>
-        <Form.Control
-          type="text"
-          name="total"
-          placeholder="0"
-          value={total}
-          onChange={handleOnChange}
-        />
+        <Form.Row>
+          <Col xs="auto">
+            <Form.Label className="mr-2 font-weight-bold">Total: </Form.Label>
+          </Col>
+          <Col xs="auto">
+            <Form.Control
+              type="text"
+              name="total"
+              placeholder="0"
+              value={total}
+              onChange={handleOnChange}
+            />
+          </Col>
+        </Form.Row>
         <div>
           {errors.total && dirty.total && (
             <ValidateError message={errors.total} />
@@ -194,14 +201,20 @@ export default function AddStatistics(props) {
       </Form.Group>
 
       <Form.Group controlId="percent">
-        <Form.Label className="mr-2 font-weight-bold">Percent:{' '}</Form.Label>
-        <Form.Control
-          type="text"
-          name="percent"
-          placeholder="0"
-          value={percent}
-          onChange={handleOnChange}
-        />
+        <Form.Row>
+          <Col xs="auto">
+            <Form.Label className="mr-2 font-weight-bold">Percent: </Form.Label>
+          </Col>
+          <Col xs="auto">
+            <Form.Control
+              type="text"
+              name="percent"
+              placeholder="0"
+              value={percent}
+              onChange={handleOnChange}
+            />
+          </Col>
+        </Form.Row>
         <div>
           {errors.percent && dirty.percent && (
             <ValidateError message={errors.percent} />
@@ -210,14 +223,20 @@ export default function AddStatistics(props) {
       </Form.Group>
 
       <Form.Group controlId="inf">
-        <Form.Label className="mr-2 font-weight-bold">INF:{' '}</Form.Label>
-        <Form.Control
-          type="text"
-          name="inf"
-          placeholder="0"
-          value={inf}
-          onChange={handleOnChange}
-        />
+        <Form.Row>
+          <Col xs="auto">
+            <Form.Label className="mr-2 font-weight-bold">INF: </Form.Label>
+          </Col>
+          <Col xs="auto">
+            <Form.Control
+              type="text"
+              name="inf"
+              placeholder="0"
+              value={inf}
+              onChange={handleOnChange}
+            />
+          </Col>
+        </Form.Row>
         <div>
           {errors.inf && dirty.inf && <ValidateError message={errors.inf} />}
         </div>

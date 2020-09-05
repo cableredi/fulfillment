@@ -10,7 +10,7 @@ export default function MainPage() {
     <>
       <Navigation />
       
-      <Container className="mt-5">
+      <Container className="mt-4">
         <Card className="text-center m-auto">
           <Card.Header as="h2">Please choose an option below</Card.Header>
           <Card.Body>

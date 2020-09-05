@@ -22,7 +22,7 @@ export default function TablesPage() {
     <>
       <Navigation />
 
-      <Container className="mt-5">
+      <Container className="mt-4">
         <FilterStatistics handleOnSubmit={onSubmit} />
 
         {displayTable && <ViewTable stats={statsSelected} />}

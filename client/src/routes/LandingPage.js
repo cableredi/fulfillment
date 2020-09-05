@@ -36,7 +36,7 @@ export default function Welcome() {
 
   return (
     <>
-      <Container className="mt-5">
+      <Container className="mt-4">
         <Card className="text-center m-auto">
           <Card.Header as="h1">Welcome to Fulfillment</Card.Header>
           <Card.Body>
