@@ -8,13 +8,23 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  ReferenceLine,
 } from "recharts";
 import Card from "react-bootstrap/Card";
 
 export default function ViewGraph(props) {
   const { stats, title } = props;
+  let yPercentGreen = 0;
 
   const data = stats;
+
+  if (title === 'ship') {
+    yPercentGreen = 35
+  } else if (title === 'pack') {
+    yPercentGreen = 150
+  } else {
+    yPercentGreen = 0
+  }
 
   let team_members = [];
 
@@ -75,7 +85,11 @@ export default function ViewGraph(props) {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" height={100} tick={CustomizedAxisTick} />
             <YAxis
-              label={{ value: "Percent (%)", angle: -90, position: "insideLeft" }}
+              label={{
+                value: "Percent (%)",
+                angle: -90,
+                position: "insideLeft",
+              }}
             />
             <Tooltip />
             <Legend iconType="circle" />
@@ -89,6 +103,7 @@ export default function ViewGraph(props) {
                 />
               );
             })}
+            <ReferenceLine y={`${yPercentGreen}`} label="Good" stroke="green" />
           </BarChart>
         </ResponsiveContainer>
       </Card.Body>

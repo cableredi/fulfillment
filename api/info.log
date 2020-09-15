@@ -1130,3 +1130,37 @@
 {"message":"Statistics with id 402 created.","level":"info"}
 {"message":"Statistics with id 403 created.","level":"info"}
 {"message":"Statistics with id 404 created.","level":"info"}
+{"message":"Statistics with id 405 created.","level":"info"}
+{"message":"Statistics with id 406 created.","level":"info"}
+{"message":"Statistics with id 407 created.","level":"info"}
+{"message":"Statistics with id 408 created.","level":"info"}
+{"message":"Statistics with id 409 created.","level":"info"}
+{"message":"Statistics with id 410 created.","level":"info"}
+{"message":"Statistics with id 411 created.","level":"info"}
+{"message":"Statistics with id 412 created.","level":"info"}
+{"message":"Statistics with id 413 created.","level":"info"}
+{"message":"Statistics with id 414 created.","level":"info"}
+{"message":"Statistics with id 415 created.","level":"info"}
+{"message":"Statistics with id 416 created.","level":"info"}
+{"message":"Statistics with id 417 created.","level":"info"}
+{"message":"Statistics with id 418 created.","level":"info"}
+{"message":"Statistics with id 419 created.","level":"info"}
+{"message":"Statistics with id 420 created.","level":"info"}
+{"message":"Statistics with id 421 created.","level":"info"}
+{"message":"Statistics with id 422 created.","level":"info"}
+{"message":"Statistics with id 423 created.","level":"info"}
+{"message":"Statistics with id 424 created.","level":"info"}
+{"message":"Statistics with id 425 created.","level":"info"}
+{"message":"Statistics with id 426 created.","level":"info"}
+{"message":"Statistics with id 427 created.","level":"info"}
+{"message":"Statistics with id 428 created.","level":"info"}
+{"message":"Statistics with id 429 created.","level":"info"}
+{"message":"Statistics with id 430 created.","level":"info"}
+{"message":"Statistics with id 431 created.","level":"info"}
+{"message":"Statistics with id 432 created.","level":"info"}
+{"message":"Statistics with id 433 created.","level":"info"}
+{"message":"Statistics with id 434 created.","level":"info"}
+{"message":"Statistics with id 435 created.","level":"info"}
+{"message":"Statistics with id 436 created.","level":"info"}
+{"message":"\n      SELECT MAX(stat_date) as max_date\n      FROM stats, team_members\n      WHERE team_members.team_member_id = stats.team_member_id\n      AND team_member.role = role\n     - missing FROM-clause entry for table \"team_member\"","level":"error"}
+{"message":"The operator \"role\" is not permitted","level":"error"}

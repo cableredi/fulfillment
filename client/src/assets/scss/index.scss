@@ -9,6 +9,9 @@ $error: red;
 $card-header: #006989;
 $button-color: #007090;
 $button-hover-color: #01A7C2;
+$stats-green: limegreen;
+$stats-yellow: yellow;
+$stats-red: red;
 
 body {
   font-family: "Shadows Into Light", cursive;
@@ -79,6 +82,11 @@ a {
   margin-right: 13px;
 }
 
+.table__percent::after,
+.table__inf::after {
+  content: ' %';
+}
+
 .table__date,
 .table__type,
 .table__name,
@@ -96,6 +104,18 @@ a {
 
 .ViewGraph__card-body {
   padding: 5px;
+}
+
+.stat_green {
+  color: $stats-green;
+}
+
+.stat_yellow {
+  color: $stats-yellow;
+}
+
+.stat_red {
+  color: $stats-red;
 }
 
 @media (min-width: 720px) {

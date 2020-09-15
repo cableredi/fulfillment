@@ -9,7 +9,7 @@ VALUES
 (
   1,
   'testuser1',
-  'Kim',
-  'Cable',
+  'Jan',
+  'Smith',
   '$2a$12$ZPfiA7T1e0XBIhXGvuf10.CnheiFG.hCfBSX7ZzT4oGhNjZqrWVb.'
 )
