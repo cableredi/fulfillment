@@ -1164,3 +1164,101 @@
 {"message":"Statistics with id 436 created.","level":"info"}
 {"message":"\n      SELECT MAX(stat_date) as max_date\n      FROM stats, team_members\n      WHERE team_members.team_member_id = stats.team_member_id\n      AND team_member.role = role\n     - missing FROM-clause entry for table \"team_member\"","level":"error"}
 {"message":"The operator \"role\" is not permitted","level":"error"}
+{"message":"Team member with id 1 created.","level":"info"}
+{"message":"Team member with id 1 created.","level":"info"}
+{"message":"select * from \"stats\" inner join \"team_members\" on \"team_members\".\"team_member_id\" = \"stats\".\"team_member_id\" order by \"stat_date\" asc - column \"stat_date\" does not exist","level":"error"}
+{"message":"select * from \"stats\" inner join \"team_members\" on \"team_members\".\"team_member_id\" = \"stats\".\"team_member_id\" order by \"stat_date\" asc - column \"stat_date\" does not exist","level":"error"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Team member with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Team member with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Team member with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Team member with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Team member with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Team member with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Team member with id 1 created.","level":"info"}
+{"message":"Statistics with id 1 created.","level":"info"}
+{"message":"Team member with id 1 created.","level":"info"}

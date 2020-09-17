@@ -16,9 +16,9 @@ const serializeStatsMember = (stat) => ({
   first_name: xss(stat.first_name),
   last_name: xss(stat.last_name),
   stat_type: xss(stat.stat_type),
-  total: stat.total,
-  percent: stat.percent,
-  inf: stat.inf,
+  total: xss(stat.total),
+  percent: xss(stat.percent),
+  inf: xss(stat.inf),
 });
 
 statsRouter
@@ -41,27 +41,6 @@ statsRouter
         res.json(stats.rows[0]);
       })
       .catch(next);
-  });
-
-statsRouter
-  .route("/:team_member_id")
-
-  .all((req, res, next) => {
-    StatsService.getByTeamMemberId(req.app.get("db"), req.params.team_member_id)
-      .then((stat) => {
-        if (!stat) {
-          return res.status(404).json({
-            error: { message: "Stat Not Found" },
-          });
-        }
-        res.stat = stat;
-        next();
-      })
-      .catch();
-  })
-
-  .get((req, res) => {
-    res.json(serializeStatsMember(res.stat));
   });
 
 statsRouter

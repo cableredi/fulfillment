@@ -13,7 +13,7 @@ const StatsApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
-  getMaxDate(date) {
+  getMaxDate() {
     return fetch(config.API_ENDPOINT_STATS + "/date", {
       method: "GET",
       headers: {
