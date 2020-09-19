@@ -24,3 +24,4 @@ yarn-error.log*
 
 Stats.xlsx
 config-prod.js
+config-test.js
