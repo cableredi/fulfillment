@@ -1262,3 +1262,7 @@
 {"message":"Team member with id 1 created.","level":"info"}
 {"message":"Statistics with id 1 created.","level":"info"}
 {"message":"Team member with id 1 created.","level":"info"}
+{"message":"the database system is starting up","level":"error"}
+{"message":"the database system is starting up","level":"error"}
+{"message":"the database system is shutting down","level":"error"}
+{"message":"Statistics with id 437 created.","level":"info"}
