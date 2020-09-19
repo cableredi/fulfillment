@@ -12,23 +12,23 @@ This is an application to track Pick, Pack, and OPU statistics for Team Members 
 
 #### Home Page: [website](website-link)
 
-![Home Page]('./images/home.png')
+![Home Page](./images/home.png)
 
 #### Team Members Page: [website](website-link)
 
-![Team Members Page]('../images/team_members.png')
+![Team Members Page](./images/team_members.png)
 
 #### Add Statistics Page: [website](website-link)
 
-![Add Statistics Page]('../images/statistics.png')
+![Add Statistics Page](./images/statistics.png)
 
 #### Table View Page: [website](website-link)
 
-![Table View Page]('../images/tables.png')
+![Table View Page](./images/tables.png)
 
 #### Graph View Page: [website](website-link)
 
-![Graph View Page]('../images/graphs.png')
+![Graph View Page](./images/graphs.png)
 
 ## API
 
