@@ -23,7 +23,7 @@ export default function LoginModalForm(props) {
     const { username, password } = state;
 
     AuthApiService.postLogin({
-      user_name: username,
+      user_name: username.toLowerCase(),
       password: password,
     })
       .then((res) => {
