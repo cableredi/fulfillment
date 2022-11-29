@@ -4,9 +4,6 @@
 
 This is an application to track Pick, Pack, and OPU statistics for Team Members working in Fulfillment.
 
-## Check it out
-[https://fulfillment-six.vercel.app/](https://fulfillment-six.vercel.app/)
-
 ## Screenshots
 
 #### Home Page: [https://fulfillment-six.vercel.app/](https://fulfillment-six.vercel.app/)
